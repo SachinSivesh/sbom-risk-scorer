@@ -6,7 +6,7 @@ A full-stack DevSecOps dashboard that ingests a Software Bill of Materials (SBOM
 
 - **Backend**: Python 3.11, FastAPI, Celery, PostgreSQL 15, Redis 7, SQLAlchemy 2.0, networkx.
 - **Frontend**: React 18, TypeScript, Vite, Recharts, react-force-graph-2d, Lucide.
-- **AI Integration**: Anthropic Claude API (claude-sonnet-4-6).
+- **AI Integration**: Google Gemini API (gemini-3.5-flash).
 - **Deployment**: Docker Compose.
 
 ## Core Features
@@ -17,7 +17,7 @@ A full-stack DevSecOps dashboard that ingests a Software Bill of Materials (SBOM
 4. **License Compliance**: Evaluates copyleft licenses and identifies license compatibility conflicts.
 5. **Maintenance Health Analysis**: Measures GitHub stars, pushing dates, and release frequencies.
 6. **Deterministic Scoring Engine**: Calculates risk score (0-100) using direct dependency weight biases.
-7. **AI Remediation Advisor**: Generates natural-language remediation suggestions using Claude Sonnet.
+7. **AI Remediation Advisor**: Generates natural-language remediation suggestions using Google Gemini 2.5 Flash.
 8. **Interactive Explorer**: Modern force-directed 2D canvas visualization graph with info drawer.
 
 ---
@@ -28,7 +28,7 @@ A full-stack DevSecOps dashboard that ingests a Software Bill of Materials (SBOM
 Create a `.env` file in the root directory:
 ```env
 GITHUB_TOKEN=your_github_token_here
-ANTHROPIC_API_KEY=your_anthropic_api_key_here
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
 ### 2. Launch Services

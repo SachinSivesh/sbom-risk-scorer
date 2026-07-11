@@ -254,7 +254,6 @@ def analyze_sbom_task(self, sbom_id: str):
             breakdown_json=score_result.breakdown,
         )
         session.add(risk_report)
-        session.commit()
 
         # ── Step 5: AI Summary ──────────────────────────────────────
         try:

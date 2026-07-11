@@ -117,9 +117,29 @@ async def get_ai_summary(
     db: AsyncSession = Depends(get_db),
 ):
     """Fetch the AI-generated remediation summary."""
-    # Get risk report first
+    # Check SBOM status first
+    sbom_result = await db.execute(
+        select(Sbom).filter(Sbom.id == sbom_id)
+    )
+    sbom = sbom_result.scalar_one_or_none()
+
+    if not sbom:
+        raise HTTPException(status_code=404, detail={
+            "code": "SBOM_NOT_FOUND",
+            "message": f"SBOM {sbom_id} not found",
+        })
+
+    if sbom.status != "completed":
+        raise HTTPException(status_code=409, detail={
+            "code": "ANALYSIS_NOT_COMPLETE",
+            "message": f"Analysis status: {sbom.status}",
+        })
+
+    # Get risk report first with its AI report preloaded
     result = await db.execute(
-        select(RiskReport).filter(RiskReport.sbom_id == sbom_id)
+        select(RiskReport)
+        .filter(RiskReport.sbom_id == sbom_id)
+        .options(selectinload(RiskReport.ai_report))
     )
     report = result.scalar_one_or_none()
 
@@ -129,11 +149,7 @@ async def get_ai_summary(
             "message": f"Risk report for SBOM {sbom_id} not found",
         })
 
-    # Get AI report
-    result = await db.execute(
-        select(AIReport).filter(AIReport.risk_report_id == report.id)
-    )
-    ai_report = result.scalar_one_or_none()
+    ai_report = report.ai_report
 
     if not ai_report:
         raise HTTPException(status_code=404, detail={

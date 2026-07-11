@@ -21,8 +21,8 @@ class Settings(BaseSettings):
     # GitHub API
     GITHUB_TOKEN: str = ""
 
-    # Anthropic Claude API
-    ANTHROPIC_API_KEY: str = ""
+    # Google Gemini API
+    GEMINI_API_KEY: str = ""
 
     # File storage
     SBOM_STORAGE_PATH: str = "./storage/sboms"

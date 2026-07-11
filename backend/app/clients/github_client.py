@@ -51,6 +51,8 @@ class GitHubClient:
         cache_key = f"github:{owner}/{repo}"
         cached = await self.cache.get(cache_key)
         if cached is not None:
+            if cached.get("last_commit_at"):
+                cached["last_commit_at"] = datetime.fromisoformat(cached["last_commit_at"])
             return GitHubRepoInfo(**cached)
 
         info = GitHubRepoInfo()

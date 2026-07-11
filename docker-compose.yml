@@ -33,14 +33,14 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+    env_file:
+      - ./backend/.env
     environment:
       DATABASE_URL: postgresql+asyncpg://sbom:sbom_password@postgres:5432/sbom_risk_scorer
       SYNC_DATABASE_URL: postgresql://sbom:sbom_password@postgres:5432/sbom_risk_scorer
       REDIS_URL: redis://redis:6379/0
       CELERY_BROKER_URL: redis://redis:6379/1
       CELERY_RESULT_BACKEND: redis://redis:6379/1
-      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       SBOM_STORAGE_PATH: /app/storage/sboms
       DEBUG: "true"
     volumes:
@@ -57,14 +57,14 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
+    env_file:
+      - ./backend/.env
     environment:
       DATABASE_URL: postgresql+asyncpg://sbom:sbom_password@postgres:5432/sbom_risk_scorer
       SYNC_DATABASE_URL: postgresql://sbom:sbom_password@postgres:5432/sbom_risk_scorer
       REDIS_URL: redis://redis:6379/0
       CELERY_BROKER_URL: redis://redis:6379/1
       CELERY_RESULT_BACKEND: redis://redis:6379/1
-      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
-      ANTHROPIC_API_KEY: ${ANTHROPIC_API_KEY:-}
       SBOM_STORAGE_PATH: /app/storage/sboms
       DEBUG: "true"
     volumes:

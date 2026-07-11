@@ -3,7 +3,7 @@
 import json
 from typing import Optional
 from app.ai.prompts import SYSTEM_PROMPT, RETRY_SUFFIX
-from app.clients.llm_client import LLMClient
+from app.clients.llm_client import LLMClient, RemediationSummary
 from app.utils.logging import get_logger
 
 logger = get_logger(__name__)
@@ -35,68 +35,42 @@ class RemediationService:
         report_json = json.dumps(risk_report, default=str, indent=2)
 
         # First attempt
-        response_text = await self.client.generate(
+        parsed_obj = await self.client.generate(
             system_prompt=SYSTEM_PROMPT,
             user_message=report_json,
         )
 
-        if response_text:
-            parsed = self._parse_response(response_text)
-            if parsed:
-                parsed["model_used"] = "claude-sonnet-4-20250514"
-                parsed["fallback_used"] = False
-                return parsed
+        if parsed_obj is None:
+            # Fallback immediately
+            logger.warning("LLM failed, using deterministic fallback template")
+            logger.warning("Fallback is used")
+            return self._generate_fallback(risk_report)
 
-            # Retry once with stricter instructions
-            logger.warning("First LLM response failed validation, retrying")
-            response_text = await self.client.generate(
-                system_prompt=SYSTEM_PROMPT + RETRY_SUFFIX,
-                user_message=report_json,
-            )
+        if isinstance(parsed_obj, RemediationSummary):
+            parsed = parsed_obj.model_dump()
+            parsed["top_actions"] = parsed["top_actions"][:3]
+            parsed["model_used"] = "gemini-3.5-flash"
+            parsed["fallback_used"] = False
+            return parsed
 
-            if response_text:
-                parsed = self._parse_response(response_text)
-                if parsed:
-                    parsed["model_used"] = "claude-sonnet-4-20250514"
-                    parsed["fallback_used"] = False
-                    return parsed
+        # Retry once with stricter instructions
+        logger.warning("First LLM response failed validation, retrying")
+        parsed_obj = await self.client.generate(
+            system_prompt=SYSTEM_PROMPT + RETRY_SUFFIX,
+            user_message=report_json,
+        )
+
+        if isinstance(parsed_obj, RemediationSummary):
+            parsed = parsed_obj.model_dump()
+            parsed["top_actions"] = parsed["top_actions"][:3]
+            parsed["model_used"] = "gemini-3.5-flash"
+            parsed["fallback_used"] = False
+            return parsed
 
         # Fallback to deterministic template
         logger.warning("LLM failed, using deterministic fallback template")
+        logger.warning("Fallback is used")
         return self._generate_fallback(risk_report)
-
-    def _parse_response(self, text: str) -> Optional[dict]:
-        """Parse and validate the LLM JSON response."""
-        try:
-            # Strip markdown code fences if present
-            cleaned = text.strip()
-            if cleaned.startswith("```"):
-                lines = cleaned.split("\n")
-                cleaned = "\n".join(lines[1:-1])
-
-            data = json.loads(cleaned)
-
-            # Validate required fields
-            if not isinstance(data.get("summary"), str):
-                return None
-            if not isinstance(data.get("top_actions"), list):
-                return None
-
-            # Validate each action
-            for action in data["top_actions"]:
-                if not all(k in action for k in ("title", "description", "priority")):
-                    return None
-                if action["priority"] not in ("HIGH", "MEDIUM", "LOW"):
-                    return None
-
-            # Cap to 3 actions
-            data["top_actions"] = data["top_actions"][:3]
-
-            return data
-
-        except (json.JSONDecodeError, KeyError, TypeError) as e:
-            logger.warning("Failed to parse LLM response", error=str(e))
-            return None
 
     def _generate_fallback(self, risk_report: dict) -> dict:
         """Generate a deterministic fallback summary from the risk report."""
