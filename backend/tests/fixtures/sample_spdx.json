@@ -1,0 +1,154 @@
+{
+  "spdxVersion": "SPDX-2.3",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "name": "inventory-api",
+  "documentNamespace": "https://example.com/inventory-api",
+  "documentDescribes": ["SPDXRef-inventory-api"],
+  "packages": [
+    {
+      "SPDXID": "SPDXRef-inventory-api",
+      "name": "inventory-api",
+      "versionInfo": "1.0.0",
+      "downloadLocation": "https://github.com/example/inventory-api",
+      "licenseDeclared": "MIT"
+    },
+    {
+      "SPDXID": "SPDXRef-flask",
+      "name": "flask",
+      "versionInfo": "2.0.1",
+      "downloadLocation": "https://github.com/pallets/flask",
+      "licenseDeclared": "BSD-3-Clause",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/flask@2.0.1" }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-requests",
+      "name": "requests",
+      "versionInfo": "2.25.1",
+      "downloadLocation": "https://github.com/psf/requests",
+      "licenseDeclared": "Apache-2.0",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/requests@2.25.1" }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-jinja2",
+      "name": "jinja2",
+      "versionInfo": "2.11.3",
+      "downloadLocation": "https://github.com/pallets/jinja",
+      "licenseDeclared": "BSD-3-Clause",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/jinja2@2.11.3" }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-werkzeug",
+      "name": "werkzeug",
+      "versionInfo": "2.0.1",
+      "downloadLocation": "https://github.com/pallets/werkzeug",
+      "licenseDeclared": "BSD-3-Clause",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/werkzeug@2.0.1" }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-urllib3",
+      "name": "urllib3",
+      "versionInfo": "1.26.5",
+      "downloadLocation": "https://github.com/urllib3/urllib3",
+      "licenseDeclared": "MIT",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/urllib3@1.26.5" }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-certifi",
+      "name": "certifi",
+      "versionInfo": "2021.5.30",
+      "downloadLocation": "https://github.com/certifi/python-certifi",
+      "licenseDeclared": "MPL-2.0",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/certifi@2021.5.30" }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-sqlalchemy",
+      "name": "sqlalchemy",
+      "versionInfo": "1.4.22",
+      "downloadLocation": "https://github.com/sqlalchemy/sqlalchemy",
+      "licenseDeclared": "MIT",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/sqlalchemy@1.4.22" }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-markupsafe",
+      "name": "markupsafe",
+      "versionInfo": "2.0.1",
+      "downloadLocation": "https://github.com/pallets/markupsafe",
+      "licenseDeclared": "BSD-3-Clause",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/markupsafe@2.0.1" }
+      ]
+    },
+    {
+      "SPDXID": "SPDXRef-pyyaml",
+      "name": "pyyaml",
+      "versionInfo": "5.4.1",
+      "downloadLocation": "https://github.com/yaml/pyyaml",
+      "licenseDeclared": "MIT",
+      "externalRefs": [
+        { "referenceType": "purl", "referenceLocator": "pkg:pypi/pyyaml@5.4.1" }
+      ]
+    }
+  ],
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-inventory-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-flask"
+    },
+    {
+      "spdxElementId": "SPDXRef-inventory-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-requests"
+    },
+    {
+      "spdxElementId": "SPDXRef-inventory-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-sqlalchemy"
+    },
+    {
+      "spdxElementId": "SPDXRef-inventory-api",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-pyyaml"
+    },
+    {
+      "spdxElementId": "SPDXRef-flask",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-jinja2"
+    },
+    {
+      "spdxElementId": "SPDXRef-flask",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-werkzeug"
+    },
+    {
+      "spdxElementId": "SPDXRef-requests",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-urllib3"
+    },
+    {
+      "spdxElementId": "SPDXRef-requests",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-certifi"
+    },
+    {
+      "spdxElementId": "SPDXRef-jinja2",
+      "relationshipType": "DEPENDS_ON",
+      "relatedSpdxElement": "SPDXRef-markupsafe"
+    }
+  ]
+}
