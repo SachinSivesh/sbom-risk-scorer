@@ -1,0 +1,484 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:7fbb8f87-7507-4267-891e-ac423fd17dc5",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-11T12:00:00Z",
+    "component": {
+      "bom-ref": "root-app",
+      "name": "card-authorization-engine",
+      "version": "1.0.0",
+      "type": "application"
+    }
+  },
+  "components": [
+    {
+      "name": "Newtonsoft.Json",
+      "version": "13.0.1",
+      "type": "library",
+      "purl": "pkg:nuget/Newtonsoft.Json@13.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/JamesNK/Newtonsoft.Json"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.EntityFrameworkCore",
+      "version": "6.0.5",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.EntityFrameworkCore@6.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/efcore"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.AspNetCore.Authentication.JwtBearer",
+      "version": "6.0.5",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.AspNetCore.Authentication.JwtBearer@6.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/aspnetcore"
+        }
+      ]
+    },
+    {
+      "name": "Serilog",
+      "version": "2.10.0",
+      "type": "library",
+      "purl": "pkg:nuget/Serilog@2.10.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/serilog/serilog"
+        }
+      ]
+    },
+    {
+      "name": "Swashbuckle.AspNetCore",
+      "version": "6.3.0",
+      "type": "library",
+      "purl": "pkg:nuget/Swashbuckle.AspNetCore@6.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/domaindrivendev/Swashbuckle.AspNetCore"
+        }
+      ]
+    },
+    {
+      "name": "MediatR",
+      "version": "10.0.1",
+      "type": "library",
+      "purl": "pkg:nuget/MediatR@10.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jbogard/MediatR"
+        }
+      ]
+    },
+    {
+      "name": "Polly",
+      "version": "7.2.3",
+      "type": "library",
+      "purl": "pkg:nuget/Polly@7.2.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/App-vNext/Polly"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.IdentityModel.Tokens",
+      "version": "6.18.0",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.IdentityModel.Tokens@6.18.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet"
+        }
+      ]
+    },
+    {
+      "name": "System.IdentityModel.Tokens.Jwt",
+      "version": "6.18.0",
+      "type": "library",
+      "purl": "pkg:nuget/System.IdentityModel.Tokens.Jwt@6.18.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/AzureAD/azure-activedirectory-identitymodel-extensions-for-dotnet"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.EntityFrameworkCore.Abstractions",
+      "version": "6.0.5",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.EntityFrameworkCore.Abstractions@6.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/efcore"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.EntityFrameworkCore.Relational",
+      "version": "6.0.5",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.EntityFrameworkCore.Relational@6.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/efcore"
+        }
+      ]
+    },
+    {
+      "name": "Swashbuckle.AspNetCore.Swagger",
+      "version": "6.3.0",
+      "type": "library",
+      "purl": "pkg:nuget/Swashbuckle.AspNetCore.Swagger@6.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/domaindrivendev/Swashbuckle.AspNetCore"
+        }
+      ]
+    },
+    {
+      "name": "Swashbuckle.AspNetCore.SwaggerGen",
+      "version": "6.3.0",
+      "type": "library",
+      "purl": "pkg:nuget/Swashbuckle.AspNetCore.SwaggerGen@6.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/domaindrivendev/Swashbuckle.AspNetCore"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.Extensions.Logging",
+      "version": "6.0.0",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.Extensions.Logging@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/runtime"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.Extensions.Caching.Abstractions",
+      "version": "6.0.0",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.Extensions.Caching.Abstractions@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/runtime"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.Extensions.DependencyInjection",
+      "version": "6.0.0",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.Extensions.DependencyInjection@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/runtime"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.Extensions.Options",
+      "version": "6.0.0",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.Extensions.Options@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/runtime"
+        }
+      ]
+    },
+    {
+      "name": "System.Text.Json",
+      "version": "6.0.0",
+      "type": "library",
+      "purl": "pkg:nuget/System.Text.Json@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/runtime"
+        }
+      ]
+    },
+    {
+      "name": "System.Text.Encodings.Web",
+      "version": "6.0.0",
+      "type": "library",
+      "purl": "pkg:nuget/System.Text.Encodings.Web@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/runtime"
+        }
+      ]
+    },
+    {
+      "name": "Microsoft.Bcl.AsyncInterfaces",
+      "version": "6.0.0",
+      "type": "library",
+      "purl": "pkg:nuget/Microsoft.Bcl.AsyncInterfaces@6.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/runtime"
+        }
+      ]
+    },
+    {
+      "name": "System.Threading.Tasks.Extensions",
+      "version": "4.5.4",
+      "type": "library",
+      "purl": "pkg:nuget/System.Threading.Tasks.Extensions@4.5.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dotnet/runtime"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "root-app",
+      "dependsOn": [
+        "pkg:nuget/Newtonsoft.Json@13.0.1",
+        "pkg:nuget/Microsoft.EntityFrameworkCore@6.0.5",
+        "pkg:nuget/Microsoft.AspNetCore.Authentication.JwtBearer@6.0.5",
+        "pkg:nuget/Serilog@2.10.0",
+        "pkg:nuget/Swashbuckle.AspNetCore@6.3.0",
+        "pkg:nuget/MediatR@10.0.1",
+        "pkg:nuget/Polly@7.2.3"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Microsoft.AspNetCore.Authentication.JwtBearer@6.0.5",
+      "dependsOn": [
+        "pkg:nuget/Microsoft.IdentityModel.Tokens@6.18.0",
+        "pkg:nuget/System.IdentityModel.Tokens.Jwt@6.18.0"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Microsoft.EntityFrameworkCore@6.0.5",
+      "dependsOn": [
+        "pkg:nuget/Microsoft.EntityFrameworkCore.Abstractions@6.0.5",
+        "pkg:nuget/Microsoft.EntityFrameworkCore.Relational@6.0.5"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Swashbuckle.AspNetCore@6.3.0",
+      "dependsOn": [
+        "pkg:nuget/Swashbuckle.AspNetCore.Swagger@6.3.0",
+        "pkg:nuget/Swashbuckle.AspNetCore.SwaggerGen@6.3.0"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Microsoft.EntityFrameworkCore.Relational@6.0.5",
+      "dependsOn": [
+        "pkg:nuget/Microsoft.Extensions.Logging@6.0.0",
+        "pkg:nuget/Microsoft.Extensions.Caching.Abstractions@6.0.0",
+        "pkg:nuget/Microsoft.Extensions.DependencyInjection@6.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Microsoft.IdentityModel.Tokens@6.18.0",
+      "dependsOn": [
+        "pkg:nuget/System.Text.Json@6.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/System.Text.Json@6.0.0",
+      "dependsOn": [
+        "pkg:nuget/System.Text.Encodings.Web@6.0.0",
+        "pkg:nuget/Microsoft.Bcl.AsyncInterfaces@6.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Microsoft.Bcl.AsyncInterfaces@6.0.0",
+      "dependsOn": [
+        "pkg:nuget/System.Threading.Tasks.Extensions@4.5.4"
+      ]
+    },
+    {
+      "ref": "pkg:nuget/Microsoft.Extensions.Options@6.0.0",
+      "dependsOn": [
+        "pkg:nuget/Microsoft.Extensions.DependencyInjection@6.0.0"
+      ]
+    }
+  ]
+}

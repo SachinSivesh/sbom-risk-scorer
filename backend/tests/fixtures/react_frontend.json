@@ -1,0 +1,709 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:21781a9d-964b-4464-aaf5-2d7e0c1c530e",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-11T12:00:00Z",
+    "component": {
+      "bom-ref": "root-app",
+      "name": "react-frontend",
+      "version": "1.0.0",
+      "type": "application"
+    }
+  },
+  "components": [
+    {
+      "name": "express",
+      "version": "4.17.1",
+      "type": "library",
+      "purl": "pkg:npm/express@4.17.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/expressjs/express"
+        }
+      ]
+    },
+    {
+      "name": "helmet",
+      "version": "5.0.2",
+      "type": "library",
+      "purl": "pkg:npm/helmet@5.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/helmetjs/helmet"
+        }
+      ]
+    },
+    {
+      "name": "cors",
+      "version": "2.8.5",
+      "type": "library",
+      "purl": "pkg:npm/cors@2.8.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/expressjs/cors"
+        }
+      ]
+    },
+    {
+      "name": "axios",
+      "version": "0.21.1",
+      "type": "library",
+      "purl": "pkg:npm/axios@0.21.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/axios/axios"
+        }
+      ]
+    },
+    {
+      "name": "jsonwebtoken",
+      "version": "8.5.1",
+      "type": "library",
+      "purl": "pkg:npm/jsonwebtoken@8.5.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/auth0/node-jsonwebtoken"
+        }
+      ]
+    },
+    {
+      "name": "bcrypt",
+      "version": "5.0.1",
+      "type": "library",
+      "purl": "pkg:npm/bcrypt@5.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/kelektiv/node.bcrypt.js"
+        }
+      ]
+    },
+    {
+      "name": "dotenv",
+      "version": "16.0.0",
+      "type": "library",
+      "purl": "pkg:npm/dotenv@16.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/motdotla/dotenv"
+        }
+      ]
+    },
+    {
+      "name": "winston",
+      "version": "3.6.0",
+      "type": "library",
+      "purl": "pkg:npm/winston@3.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/winstonjs/winston"
+        }
+      ]
+    },
+    {
+      "name": "mongoose",
+      "version": "6.2.2",
+      "type": "library",
+      "purl": "pkg:npm/mongoose@6.2.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/Automattic/mongoose"
+        }
+      ]
+    },
+    {
+      "name": "compression",
+      "version": "1.7.4",
+      "type": "library",
+      "purl": "pkg:npm/compression@1.7.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/expressjs/compression"
+        }
+      ]
+    },
+    {
+      "name": "body-parser",
+      "version": "1.19.0",
+      "type": "library",
+      "purl": "pkg:npm/body-parser@1.19.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/expressjs/body-parser"
+        }
+      ]
+    },
+    {
+      "name": "debug",
+      "version": "4.3.1",
+      "type": "library",
+      "purl": "pkg:npm/debug@4.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/debug-js/debug"
+        }
+      ]
+    },
+    {
+      "name": "ms",
+      "version": "2.1.2",
+      "type": "library",
+      "purl": "pkg:npm/ms@2.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/vercel/ms"
+        }
+      ]
+    },
+    {
+      "name": "accepts",
+      "version": "1.3.7",
+      "type": "library",
+      "purl": "pkg:npm/accepts@1.3.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jshttp/accepts"
+        }
+      ]
+    },
+    {
+      "name": "mime-types",
+      "version": "2.1.27",
+      "type": "library",
+      "purl": "pkg:npm/mime-types@2.1.27",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jshttp/mime-types"
+        }
+      ]
+    },
+    {
+      "name": "negotiator",
+      "version": "0.6.2",
+      "type": "library",
+      "purl": "pkg:npm/negotiator@0.6.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jshttp/negotiator"
+        }
+      ]
+    },
+    {
+      "name": "send",
+      "version": "0.17.1",
+      "type": "library",
+      "purl": "pkg:npm/send@0.17.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pillarjs/send"
+        }
+      ]
+    },
+    {
+      "name": "mime",
+      "version": "1.6.0",
+      "type": "library",
+      "purl": "pkg:npm/mime@1.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/broofa/mime"
+        }
+      ]
+    },
+    {
+      "name": "etag",
+      "version": "1.8.1",
+      "type": "library",
+      "purl": "pkg:npm/etag@1.8.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jshttp/etag"
+        }
+      ]
+    },
+    {
+      "name": "follow-redirects",
+      "version": "1.14.1",
+      "type": "library",
+      "purl": "pkg:npm/follow-redirects@1.14.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/follow-redirects/follow-redirects"
+        }
+      ]
+    },
+    {
+      "name": "form-data",
+      "version": "4.0.0",
+      "type": "library",
+      "purl": "pkg:npm/form-data@4.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/form-data/form-data"
+        }
+      ]
+    },
+    {
+      "name": "asynckit",
+      "version": "0.4.0",
+      "type": "library",
+      "purl": "pkg:npm/asynckit@0.4.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/caolan/asynckit"
+        }
+      ]
+    },
+    {
+      "name": "combined-stream",
+      "version": "1.0.8",
+      "type": "library",
+      "purl": "pkg:npm/combined-stream@1.0.8",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/felixge/node-combined-stream"
+        }
+      ]
+    },
+    {
+      "name": "mime-db",
+      "version": "1.44.0",
+      "type": "library",
+      "purl": "pkg:npm/mime-db@1.44.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jshttp/mime-db"
+        }
+      ]
+    },
+    {
+      "name": "mongodb",
+      "version": "4.3.1",
+      "type": "library",
+      "purl": "pkg:npm/mongodb@4.3.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/mongodb/node-mongodb-native"
+        }
+      ]
+    },
+    {
+      "name": "mpath",
+      "version": "0.8.4",
+      "type": "library",
+      "purl": "pkg:npm/mpath@0.8.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aheckmann/mpath"
+        }
+      ]
+    },
+    {
+      "name": "mquery",
+      "version": "4.0.2",
+      "type": "library",
+      "purl": "pkg:npm/mquery@4.0.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aheckmann/mquery"
+        }
+      ]
+    },
+    {
+      "name": "kareem",
+      "version": "2.3.4",
+      "type": "library",
+      "purl": "pkg:npm/kareem@2.3.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aheckmann/kareem"
+        }
+      ]
+    },
+    {
+      "name": "safe-buffer",
+      "version": "5.2.1",
+      "type": "library",
+      "purl": "pkg:npm/safe-buffer@5.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/feross/safe-buffer"
+        }
+      ]
+    },
+    {
+      "name": "cookie",
+      "version": "0.4.1",
+      "type": "library",
+      "purl": "pkg:npm/cookie@0.4.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jshttp/cookie"
+        }
+      ]
+    },
+    {
+      "name": "qs",
+      "version": "6.7.0",
+      "type": "library",
+      "purl": "pkg:npm/qs@6.7.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/ljharb/qs"
+        }
+      ]
+    },
+    {
+      "name": "vary",
+      "version": "1.1.2",
+      "type": "library",
+      "purl": "pkg:npm/vary@1.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jshttp/vary"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "root-app",
+      "dependsOn": [
+        "pkg:npm/express@4.17.1",
+        "pkg:npm/helmet@5.0.2",
+        "pkg:npm/cors@2.8.5",
+        "pkg:npm/axios@0.21.1",
+        "pkg:npm/jsonwebtoken@8.5.1",
+        "pkg:npm/bcrypt@5.0.1",
+        "pkg:npm/dotenv@16.0.0",
+        "pkg:npm/winston@3.6.0",
+        "pkg:npm/mongoose@6.2.2",
+        "pkg:npm/compression@1.7.4"
+      ]
+    },
+    {
+      "ref": "pkg:npm/express@4.17.1",
+      "dependsOn": [
+        "pkg:npm/body-parser@1.19.0",
+        "pkg:npm/debug@4.3.1",
+        "pkg:npm/accepts@1.3.7",
+        "pkg:npm/send@0.17.1",
+        "pkg:npm/qs@6.7.0",
+        "pkg:npm/cookie@0.4.1",
+        "pkg:npm/vary@1.1.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/accepts@1.3.7",
+      "dependsOn": [
+        "pkg:npm/mime-types@2.1.27",
+        "pkg:npm/negotiator@0.6.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/mime-types@2.1.27",
+      "dependsOn": [
+        "pkg:npm/mime-db@1.44.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/send@0.17.1",
+      "dependsOn": [
+        "pkg:npm/mime@1.6.0",
+        "pkg:npm/etag@1.8.1"
+      ]
+    },
+    {
+      "ref": "pkg:npm/debug@4.3.1",
+      "dependsOn": [
+        "pkg:npm/ms@2.1.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/axios@0.21.1",
+      "dependsOn": [
+        "pkg:npm/follow-redirects@1.14.1",
+        "pkg:npm/form-data@4.0.0"
+      ]
+    },
+    {
+      "ref": "pkg:npm/form-data@4.0.0",
+      "dependsOn": [
+        "pkg:npm/asynckit@0.4.0",
+        "pkg:npm/combined-stream@1.0.8"
+      ]
+    },
+    {
+      "ref": "pkg:npm/jsonwebtoken@8.5.1",
+      "dependsOn": [
+        "pkg:npm/ms@2.1.2"
+      ]
+    },
+    {
+      "ref": "pkg:npm/mongoose@6.2.2",
+      "dependsOn": [
+        "pkg:npm/mongodb@4.3.1",
+        "pkg:npm/mpath@0.8.4",
+        "pkg:npm/mquery@4.0.2",
+        "pkg:npm/kareem@2.3.4"
+      ]
+    }
+  ]
+}

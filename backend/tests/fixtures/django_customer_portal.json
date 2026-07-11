@@ -1,0 +1,493 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:c8f85697-6ad1-4a31-92bf-a0d8c1f14f3c",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-11T12:00:00Z",
+    "component": {
+      "bom-ref": "root-app",
+      "name": "django-customer-portal",
+      "version": "1.0.0",
+      "type": "application"
+    }
+  },
+  "components": [
+    {
+      "name": "fastapi",
+      "version": "0.85.0",
+      "type": "library",
+      "purl": "pkg:pypi/fastapi@0.85.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/tiangolo/fastapi"
+        }
+      ]
+    },
+    {
+      "name": "starlette",
+      "version": "0.20.4",
+      "type": "library",
+      "purl": "pkg:pypi/starlette@0.20.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/encode/starlette"
+        }
+      ]
+    },
+    {
+      "name": "pydantic",
+      "version": "1.10.2",
+      "type": "library",
+      "purl": "pkg:pypi/pydantic@1.10.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pydantic/pydantic"
+        }
+      ]
+    },
+    {
+      "name": "uvicorn",
+      "version": "0.18.3",
+      "type": "library",
+      "purl": "pkg:pypi/uvicorn@0.18.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/encode/uvicorn"
+        }
+      ]
+    },
+    {
+      "name": "sqlalchemy",
+      "version": "1.4.41",
+      "type": "library",
+      "purl": "pkg:pypi/sqlalchemy@1.4.41",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/sqlalchemy/sqlalchemy"
+        }
+      ]
+    },
+    {
+      "name": "requests",
+      "version": "2.28.1",
+      "type": "library",
+      "purl": "pkg:pypi/requests@2.28.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/psf/requests"
+        }
+      ]
+    },
+    {
+      "name": "jinja2",
+      "version": "3.1.2",
+      "type": "library",
+      "purl": "pkg:pypi/jinja2@3.1.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/jinja"
+        }
+      ]
+    },
+    {
+      "name": "urllib3",
+      "version": "1.26.12",
+      "type": "library",
+      "purl": "pkg:pypi/urllib3@1.26.12",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/urllib3/urllib3"
+        }
+      ]
+    },
+    {
+      "name": "click",
+      "version": "8.1.3",
+      "type": "library",
+      "purl": "pkg:pypi/click@8.1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/click"
+        }
+      ]
+    },
+    {
+      "name": "certifi",
+      "version": "2022.9.24",
+      "type": "library",
+      "purl": "pkg:pypi/certifi@2022.9.24",
+      "licenses": [
+        {
+          "license": {
+            "id": "MPL-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/certifi/python-certifi"
+        }
+      ]
+    },
+    {
+      "name": "h11",
+      "version": "0.14.0",
+      "type": "library",
+      "purl": "pkg:pypi/h11@0.14.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/python-hyper/h11"
+        }
+      ]
+    },
+    {
+      "name": "websockets",
+      "version": "10.3",
+      "type": "library",
+      "purl": "pkg:pypi/websockets@10.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/aaugustin/websockets"
+        }
+      ]
+    },
+    {
+      "name": "greenlet",
+      "version": "1.1.3",
+      "type": "library",
+      "purl": "pkg:pypi/greenlet@1.1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/python-greenlet/greenlet"
+        }
+      ]
+    },
+    {
+      "name": "idna",
+      "version": "3.4",
+      "type": "library",
+      "purl": "pkg:pypi/idna@3.4",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/kjd/idna"
+        }
+      ]
+    },
+    {
+      "name": "charset-normalizer",
+      "version": "2.1.1",
+      "type": "library",
+      "purl": "pkg:pypi/charset-normalizer@2.1.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/Ousret/charset-normalizer"
+        }
+      ]
+    },
+    {
+      "name": "markupsafe",
+      "version": "2.1.1",
+      "type": "library",
+      "purl": "pkg:pypi/markupsafe@2.1.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pallets/markupsafe"
+        }
+      ]
+    },
+    {
+      "name": "anyio",
+      "version": "3.6.1",
+      "type": "library",
+      "purl": "pkg:pypi/anyio@3.6.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/agronholm/anyio"
+        }
+      ]
+    },
+    {
+      "name": "sniffio",
+      "version": "1.3.0",
+      "type": "library",
+      "purl": "pkg:pypi/sniffio@1.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/python-attrs/sniffio"
+        }
+      ]
+    },
+    {
+      "name": "typing-extensions",
+      "version": "4.3.0",
+      "type": "library",
+      "purl": "pkg:pypi/typing-extensions@4.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "PSF-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/python/typing_extensions"
+        }
+      ]
+    },
+    {
+      "name": "email-validator",
+      "version": "1.3.0",
+      "type": "library",
+      "purl": "pkg:pypi/email-validator@1.3.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/kushal-das/email_validator"
+        }
+      ]
+    },
+    {
+      "name": "dnspython",
+      "version": "2.2.1",
+      "type": "library",
+      "purl": "pkg:pypi/dnspython@2.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "ISC"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/rthalley/dnspython"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "root-app",
+      "dependsOn": [
+        "pkg:pypi/fastapi@0.85.0",
+        "pkg:pypi/starlette@0.20.4",
+        "pkg:pypi/pydantic@1.10.2",
+        "pkg:pypi/uvicorn@0.18.3",
+        "pkg:pypi/sqlalchemy@1.4.41",
+        "pkg:pypi/requests@2.28.1",
+        "pkg:pypi/jinja2@3.1.2",
+        "pkg:pypi/urllib3@1.26.12"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/fastapi@0.85.0",
+      "dependsOn": [
+        "pkg:pypi/starlette@0.20.4",
+        "pkg:pypi/pydantic@1.10.2",
+        "pkg:pypi/anyio@3.6.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/starlette@0.20.4",
+      "dependsOn": [
+        "pkg:pypi/anyio@3.6.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/anyio@3.6.1",
+      "dependsOn": [
+        "pkg:pypi/sniffio@1.3.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/uvicorn@0.18.3",
+      "dependsOn": [
+        "pkg:pypi/h11@0.14.0",
+        "pkg:pypi/websockets@10.3",
+        "pkg:pypi/click@8.1.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/sqlalchemy@1.4.41",
+      "dependsOn": [
+        "pkg:pypi/greenlet@1.1.3"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/requests@2.28.1",
+      "dependsOn": [
+        "pkg:pypi/urllib3@1.26.12",
+        "pkg:pypi/idna@3.4",
+        "pkg:pypi/charset-normalizer@2.1.1",
+        "pkg:pypi/certifi@2022.9.24"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/jinja2@3.1.2",
+      "dependsOn": [
+        "pkg:pypi/markupsafe@2.1.1"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/pydantic@1.10.2",
+      "dependsOn": [
+        "pkg:pypi/typing-extensions@4.3.0",
+        "pkg:pypi/email-validator@1.3.0"
+      ]
+    },
+    {
+      "ref": "pkg:pypi/email-validator@1.3.0",
+      "dependsOn": [
+        "pkg:pypi/dnspython@2.2.1"
+      ]
+    }
+  ]
+}

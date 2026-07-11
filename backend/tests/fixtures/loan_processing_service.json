@@ -1,0 +1,680 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:64081d84-6ea6-46d9-870d-ad6de2ac98ff",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-11T12:00:00Z",
+    "component": {
+      "bom-ref": "root-app",
+      "name": "loan-processing-service",
+      "version": "1.0.0",
+      "type": "application"
+    }
+  },
+  "components": [
+    {
+      "name": "org.springframework:spring-core",
+      "version": "5.3.15",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-core@5.3.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-framework"
+        }
+      ]
+    },
+    {
+      "name": "org.apache.logging.log4j:log4j-core",
+      "version": "2.14.1",
+      "type": "library",
+      "purl": "pkg:maven/org.apache.logging.log4j:log4j-core@2.14.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/apache/logging-log4j2"
+        }
+      ]
+    },
+    {
+      "name": "org.hibernate:hibernate-core",
+      "version": "5.6.0.Final",
+      "type": "library",
+      "purl": "pkg:maven/org.hibernate:hibernate-core@5.6.0.Final",
+      "licenses": [
+        {
+          "license": {
+            "id": "LGPL-2.1-or-later"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/hibernate/hibernate-orm"
+        }
+      ]
+    },
+    {
+      "name": "com.fasterxml.jackson.core:jackson-databind",
+      "version": "2.13.0",
+      "type": "library",
+      "purl": "pkg:maven/com.fasterxml.jackson.core:jackson-databind@2.13.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/FasterXML/jackson-databind"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-web",
+      "version": "5.3.15",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-web@5.3.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-framework"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-security",
+      "version": "5.6.0",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-security@5.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-security"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-data-jpa",
+      "version": "2.6.0",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-data-jpa@2.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-data-jpa"
+        }
+      ]
+    },
+    {
+      "name": "commons-io:commons-io",
+      "version": "2.11.0",
+      "type": "library",
+      "purl": "pkg:maven/commons-io:commons-io@2.11.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/apache/commons-io"
+        }
+      ]
+    },
+    {
+      "name": "tomcat-embed-core",
+      "version": "9.0.58",
+      "type": "library",
+      "purl": "pkg:maven/tomcat-embed-core@9.0.58",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/apache/tomcat"
+        }
+      ]
+    },
+    {
+      "name": "com.zaxxer:HikariCP",
+      "version": "4.0.3",
+      "type": "library",
+      "purl": "pkg:maven/com.zaxxer:HikariCP@4.0.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/brettwooldridge/HikariCP"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-jcl",
+      "version": "5.3.15",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-jcl@5.3.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-framework"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-beans",
+      "version": "5.3.15",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-beans@5.3.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-framework"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-aop",
+      "version": "5.3.15",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-aop@5.3.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-framework"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-expression",
+      "version": "5.3.15",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-expression@5.3.15",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-framework"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-security-core",
+      "version": "5.6.0",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-security-core@5.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-security"
+        }
+      ]
+    },
+    {
+      "name": "org.springframework:spring-security-web",
+      "version": "5.6.0",
+      "type": "library",
+      "purl": "pkg:maven/org.springframework:spring-security-web@5.6.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/spring-projects/spring-security"
+        }
+      ]
+    },
+    {
+      "name": "com.fasterxml.jackson.core:jackson-annotations",
+      "version": "2.13.0",
+      "type": "library",
+      "purl": "pkg:maven/com.fasterxml.jackson.core:jackson-annotations@2.13.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/FasterXML/jackson-annotations"
+        }
+      ]
+    },
+    {
+      "name": "com.fasterxml.jackson.core:jackson-core",
+      "version": "2.13.0",
+      "type": "library",
+      "purl": "pkg:maven/com.fasterxml.jackson.core:jackson-core@2.13.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/FasterXML/jackson-core"
+        }
+      ]
+    },
+    {
+      "name": "org.jboss.logging:jboss-logging",
+      "version": "3.4.2.Final",
+      "type": "library",
+      "purl": "pkg:maven/org.jboss.logging:jboss-logging@3.4.2.Final",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jboss-logging/jboss-logging"
+        }
+      ]
+    },
+    {
+      "name": "com.fasterxml:classmate",
+      "version": "1.5.1",
+      "type": "library",
+      "purl": "pkg:maven/com.fasterxml:classmate@1.5.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/FasterXML/java-classmate"
+        }
+      ]
+    },
+    {
+      "name": "antlr:antlr",
+      "version": "2.7.7",
+      "type": "library",
+      "purl": "pkg:maven/antlr:antlr@2.7.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/antlr/antlr4"
+        }
+      ]
+    },
+    {
+      "name": "dom4j:dom4j",
+      "version": "2.1.3",
+      "type": "library",
+      "purl": "pkg:maven/dom4j:dom4j@2.1.3",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/dom4j/dom4j"
+        }
+      ]
+    },
+    {
+      "name": "ch.qos.logback:logback-classic",
+      "version": "1.2.10",
+      "type": "library",
+      "purl": "pkg:maven/ch.qos.logback:logback-classic@1.2.10",
+      "licenses": [
+        {
+          "license": {
+            "id": "EPL-1.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/qos-ch/logback"
+        }
+      ]
+    },
+    {
+      "name": "ch.qos.logback:logback-core",
+      "version": "1.2.10",
+      "type": "library",
+      "purl": "pkg:maven/ch.qos.logback:logback-core@1.2.10",
+      "licenses": [
+        {
+          "license": {
+            "id": "EPL-1.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/qos-ch/logback"
+        }
+      ]
+    },
+    {
+      "name": "org.slf4j:slf4j-api",
+      "version": "1.7.32",
+      "type": "library",
+      "purl": "pkg:maven/org.slf4j:slf4j-api@1.7.32",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/qos-ch/slf4j"
+        }
+      ]
+    },
+    {
+      "name": "org.apache.logging.log4j:log4j-api",
+      "version": "2.14.1",
+      "type": "library",
+      "purl": "pkg:maven/org.apache.logging.log4j:log4j-api@2.14.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/apache/logging-log4j2"
+        }
+      ]
+    },
+    {
+      "name": "tomcat-annotations-api",
+      "version": "9.0.58",
+      "type": "library",
+      "purl": "pkg:maven/tomcat-annotations-api@9.0.58",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/apache/tomcat"
+        }
+      ]
+    },
+    {
+      "name": "org.apache.commons:commons-lang3",
+      "version": "3.12.0",
+      "type": "library",
+      "purl": "pkg:maven/org.apache.commons:commons-lang3@3.12.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/apache/commons-lang"
+        }
+      ]
+    },
+    {
+      "name": "io.micrometer:micrometer-core",
+      "version": "1.8.2",
+      "type": "library",
+      "purl": "pkg:maven/io.micrometer:micrometer-core@1.8.2",
+      "licenses": [
+        {
+          "license": {
+            "id": "Apache-2.0"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/micrometer-metrics/micrometer"
+        }
+      ]
+    },
+    {
+      "name": "org.hdrhistogram:HdrHistogram",
+      "version": "2.1.12",
+      "type": "library",
+      "purl": "pkg:maven/org.hdrhistogram:HdrHistogram@2.1.12",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-2-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/HdrHistogram/HdrHistogram"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "root-app",
+      "dependsOn": [
+        "pkg:maven/org.springframework:spring-core@5.3.15",
+        "pkg:maven/org.apache.logging.log4j:log4j-core@2.14.1",
+        "pkg:maven/org.hibernate:hibernate-core@5.6.0.Final",
+        "pkg:maven/com.fasterxml.jackson.core:jackson-databind@2.13.0",
+        "pkg:maven/org.springframework:spring-web@5.3.15",
+        "pkg:maven/org.springframework:spring-security@5.6.0",
+        "pkg:maven/org.springframework:spring-data-jpa@2.6.0",
+        "pkg:maven/commons-io:commons-io@2.11.0",
+        "pkg:maven/tomcat-embed-core@9.0.58",
+        "pkg:maven/com.zaxxer:HikariCP@4.0.3"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.springframework:spring-core@5.3.15",
+      "dependsOn": [
+        "pkg:maven/org.springframework:spring-jcl@5.3.15",
+        "pkg:maven/ch.qos.logback:logback-classic@1.2.10",
+        "pkg:maven/org.apache.commons:commons-lang3@3.12.0",
+        "pkg:maven/io.micrometer:micrometer-core@1.8.2"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.springframework:spring-web@5.3.15",
+      "dependsOn": [
+        "pkg:maven/org.springframework:spring-beans@5.3.15",
+        "pkg:maven/org.springframework:spring-aop@5.3.15"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.springframework:spring-security@5.6.0",
+      "dependsOn": [
+        "pkg:maven/org.springframework:spring-security-core@5.6.0",
+        "pkg:maven/org.springframework:spring-security-web@5.6.0"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.springframework:spring-security-web@5.6.0",
+      "dependsOn": [
+        "pkg:maven/org.springframework:spring-expression@5.3.15"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.springframework:spring-data-jpa@2.6.0",
+      "dependsOn": [
+        "pkg:maven/org.springframework:spring-beans@5.3.15"
+      ]
+    },
+    {
+      "ref": "pkg:maven/com.fasterxml.jackson.core:jackson-databind@2.13.0",
+      "dependsOn": [
+        "pkg:maven/com.fasterxml.jackson.core:jackson-annotations@2.13.0",
+        "pkg:maven/com.fasterxml.jackson.core:jackson-core@2.13.0"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.hibernate:hibernate-core@5.6.0.Final",
+      "dependsOn": [
+        "pkg:maven/org.jboss.logging:jboss-logging@3.4.2.Final",
+        "pkg:maven/com.fasterxml:classmate@1.5.1",
+        "pkg:maven/antlr:antlr@2.7.7",
+        "pkg:maven/dom4j:dom4j@2.1.3"
+      ]
+    },
+    {
+      "ref": "pkg:maven/ch.qos.logback:logback-classic@1.2.10",
+      "dependsOn": [
+        "pkg:maven/ch.qos.logback:logback-core@1.2.10",
+        "pkg:maven/org.slf4j:slf4j-api@1.7.32"
+      ]
+    },
+    {
+      "ref": "pkg:maven/org.apache.logging.log4j:log4j-core@2.14.1",
+      "dependsOn": [
+        "pkg:maven/org.apache.logging.log4j:log4j-api@2.14.1"
+      ]
+    },
+    {
+      "ref": "pkg:maven/tomcat-embed-core@9.0.58",
+      "dependsOn": [
+        "pkg:maven/tomcat-annotations-api@9.0.58"
+      ]
+    },
+    {
+      "ref": "pkg:maven/io.micrometer:micrometer-core@1.8.2",
+      "dependsOn": [
+        "pkg:maven/org.hdrhistogram:HdrHistogram@2.1.12"
+      ]
+    }
+  ]
+}

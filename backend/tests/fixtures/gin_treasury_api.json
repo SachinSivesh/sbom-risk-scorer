@@ -1,0 +1,494 @@
+{
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.4",
+  "serialNumber": "urn:uuid:3ff1b5be-40f4-4ac6-b64b-d7d647049498",
+  "version": 1,
+  "metadata": {
+    "timestamp": "2026-07-11T12:00:00Z",
+    "component": {
+      "bom-ref": "root-app",
+      "name": "gin-treasury-api",
+      "version": "1.0.0",
+      "type": "application"
+    }
+  },
+  "components": [
+    {
+      "name": "github.com/gin-gonic/gin",
+      "version": "v1.8.1",
+      "type": "library",
+      "purl": "pkg:golang/github.com/gin-gonic/gin@v1.8.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/gin-gonic/gin"
+        }
+      ]
+    },
+    {
+      "name": "github.com/go-playground/validator/v10",
+      "version": "v10.11.0",
+      "type": "library",
+      "purl": "pkg:golang/github.com/go-playground/validator/v10@v10.11.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/go-playground/validator"
+        }
+      ]
+    },
+    {
+      "name": "github.com/golang-jwt/jwt/v5",
+      "version": "v5.0.0",
+      "type": "library",
+      "purl": "pkg:golang/github.com/golang-jwt/jwt/v5@v5.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/golang-jwt/jwt"
+        }
+      ]
+    },
+    {
+      "name": "go.uber.org/zap",
+      "version": "v1.23.0",
+      "type": "library",
+      "purl": "pkg:golang/go.uber.org/zap@v1.23.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/uber-go/zap"
+        }
+      ]
+    },
+    {
+      "name": "gorm.io/gorm",
+      "version": "v1.24.1",
+      "type": "library",
+      "purl": "pkg:golang/gorm.io/gorm@v1.24.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/go-gorm/gorm"
+        }
+      ]
+    },
+    {
+      "name": "gopkg.in/yaml.v3",
+      "version": "v3.0.1",
+      "type": "library",
+      "purl": "pkg:golang/gopkg.in/yaml.v3@v3.0.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/go-yaml/yaml"
+        }
+      ]
+    },
+    {
+      "name": "github.com/lib/pq",
+      "version": "v1.10.7",
+      "type": "library",
+      "purl": "pkg:golang/github.com/lib/pq@v1.10.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/lib/pq"
+        }
+      ]
+    },
+    {
+      "name": "github.com/gin-contrib/sse",
+      "version": "v0.1.0",
+      "type": "library",
+      "purl": "pkg:golang/github.com/gin-contrib/sse@v0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/gin-contrib/sse"
+        }
+      ]
+    },
+    {
+      "name": "github.com/mattn/go-isatty",
+      "version": "v0.0.16",
+      "type": "library",
+      "purl": "pkg:golang/github.com/mattn/go-isatty@v0.0.16",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/mattn/go-isatty"
+        }
+      ]
+    },
+    {
+      "name": "github.com/ugorji/go/codec",
+      "version": "v1.2.7",
+      "type": "library",
+      "purl": "pkg:golang/github.com/ugorji/go/codec@v1.2.7",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/ugorji/go"
+        }
+      ]
+    },
+    {
+      "name": "go.uber.org/multierr",
+      "version": "v1.8.0",
+      "type": "library",
+      "purl": "pkg:golang/go.uber.org/multierr@v1.8.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/uber-go/multierr"
+        }
+      ]
+    },
+    {
+      "name": "go.uber.org/atomic",
+      "version": "v1.10.0",
+      "type": "library",
+      "purl": "pkg:golang/go.uber.org/atomic@v1.10.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/uber-go/atomic"
+        }
+      ]
+    },
+    {
+      "name": "github.com/jinzhu/inflection",
+      "version": "v1.0.0",
+      "type": "library",
+      "purl": "pkg:golang/github.com/jinzhu/inflection@v1.0.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jinzhu/inflection"
+        }
+      ]
+    },
+    {
+      "name": "github.com/jinzhu/now",
+      "version": "v1.1.5",
+      "type": "library",
+      "purl": "pkg:golang/github.com/jinzhu/now@v1.1.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/jinzhu/now"
+        }
+      ]
+    },
+    {
+      "name": "golang.org/x/crypto",
+      "version": "v0.1.0",
+      "type": "library",
+      "purl": "pkg:golang/golang.org/x/crypto@v0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/golang/crypto"
+        }
+      ]
+    },
+    {
+      "name": "golang.org/x/net",
+      "version": "v0.1.0",
+      "type": "library",
+      "purl": "pkg:golang/golang.org/x/net@v0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/golang/net"
+        }
+      ]
+    },
+    {
+      "name": "golang.org/x/sys",
+      "version": "v0.1.0",
+      "type": "library",
+      "purl": "pkg:golang/golang.org/x/sys@v0.1.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/golang/sys"
+        }
+      ]
+    },
+    {
+      "name": "golang.org/x/text",
+      "version": "v0.4.0",
+      "type": "library",
+      "purl": "pkg:golang/golang.org/x/text@v0.4.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/golang/text"
+        }
+      ]
+    },
+    {
+      "name": "github.com/leodido/go-urn",
+      "version": "v1.2.1",
+      "type": "library",
+      "purl": "pkg:golang/github.com/leodido/go-urn@v1.2.1",
+      "licenses": [
+        {
+          "license": {
+            "id": "BSD-3-Clause"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/leodido/go-urn"
+        }
+      ]
+    },
+    {
+      "name": "github.com/pelletier/go-toml/v2",
+      "version": "v2.0.5",
+      "type": "library",
+      "purl": "pkg:golang/github.com/pelletier/go-toml/v2@v2.0.5",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/pelletier/go-toml"
+        }
+      ]
+    },
+    {
+      "name": "github.com/go-playground/universal-translator",
+      "version": "v0.18.0",
+      "type": "library",
+      "purl": "pkg:golang/github.com/go-playground/universal-translator@v0.18.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/go-playground/universal-translator"
+        }
+      ]
+    },
+    {
+      "name": "github.com/go-playground/locales",
+      "version": "v0.14.0",
+      "type": "library",
+      "purl": "pkg:golang/github.com/go-playground/locales@v0.14.0",
+      "licenses": [
+        {
+          "license": {
+            "id": "MIT"
+          }
+        }
+      ],
+      "externalReferences": [
+        {
+          "type": "vcs",
+          "url": "https://github.com/go-playground/locales"
+        }
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "ref": "root-app",
+      "dependsOn": [
+        "pkg:golang/github.com/gin-gonic/gin@v1.8.1",
+        "pkg:golang/github.com/go-playground/validator/v10@v10.11.0",
+        "pkg:golang/github.com/golang-jwt/jwt/v5@v5.0.0",
+        "pkg:golang/go.uber.org/zap@v1.23.0",
+        "pkg:golang/gorm.io/gorm@v1.24.1",
+        "pkg:golang/gopkg.in/yaml.v3@v3.0.1",
+        "pkg:golang/github.com/lib/pq@v1.10.7"
+      ]
+    },
+    {
+      "ref": "pkg:golang/github.com/gin-gonic/gin@v1.8.1",
+      "dependsOn": [
+        "pkg:golang/github.com/gin-contrib/sse@v0.1.0",
+        "pkg:golang/github.com/mattn/go-isatty@v0.0.16",
+        "pkg:golang/github.com/ugorji/go/codec@v1.2.7",
+        "pkg:golang/golang.org/x/net@v0.1.0",
+        "pkg:golang/github.com/pelletier/go-toml/v2@v2.0.5"
+      ]
+    },
+    {
+      "ref": "pkg:golang/go.uber.org/zap@v1.23.0",
+      "dependsOn": [
+        "pkg:golang/go.uber.org/multierr@v1.8.0",
+        "pkg:golang/go.uber.org/atomic@v1.10.0"
+      ]
+    },
+    {
+      "ref": "pkg:golang/gorm.io/gorm@v1.24.1",
+      "dependsOn": [
+        "pkg:golang/github.com/jinzhu/inflection@v1.0.0",
+        "pkg:golang/github.com/jinzhu/now@v1.1.5"
+      ]
+    },
+    {
+      "ref": "pkg:golang/github.com/go-playground/validator/v10@v10.11.0",
+      "dependsOn": [
+        "pkg:golang/golang.org/x/crypto@v0.1.0",
+        "pkg:golang/github.com/leodido/go-urn@v1.2.1",
+        "pkg:golang/github.com/go-playground/universal-translator@v0.18.0"
+      ]
+    },
+    {
+      "ref": "pkg:golang/github.com/go-playground/universal-translator@v0.18.0",
+      "dependsOn": [
+        "pkg:golang/github.com/go-playground/locales@v0.14.0"
+      ]
+    },
+    {
+      "ref": "pkg:golang/golang.org/x/net@v0.1.0",
+      "dependsOn": [
+        "pkg:golang/golang.org/x/sys@v0.1.0",
+        "pkg:golang/golang.org/x/text@v0.4.0"
+      ]
+    }
+  ]
+}
