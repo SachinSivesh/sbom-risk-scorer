@@ -130,6 +130,6 @@ GEMINI_API_KEY=your_gemini_api_key_here
 ## 9. Team
 
 * **Société Générale Hackathon Team Members**:
-  * [Team Member 1]
-  * [Team Member 2]
-  * [Team Member 3]
+  * Sachin Sivesh R K - 715524106090
+  * Rithanyaa R - 715524106087
+    
