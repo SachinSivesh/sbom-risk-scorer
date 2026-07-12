@@ -61,25 +61,39 @@ class LicenseAnalyzer:
             
             # Check ground truth label first
             gt_risk = None
+            has_lbl = False
             if app_id:
                 session = SyncSession()
                 try:
                     from app.models.dependency_label import DependencyLabelRef
+                    # 1. Exact match
                     lbl = session.query(DependencyLabelRef).filter(
                         DependencyLabelRef.library == dep["name"],
                         DependencyLabelRef.version == dep["version"],
                         DependencyLabelRef.application_id == app_id
                     ).first()
-                    if lbl and lbl.is_risky and lbl.risk_type in ("LICENSE_CONFLICT", "TRANSITIVE_LICENSE_CONFLICT", "LICENSE_UNKNOWN"):
-                        gt_risk = lbl.severity or "HIGH"
+                    
+                    # 2. Version-agnostic fallback
+                    if not lbl:
+                        lbl = session.query(DependencyLabelRef).filter(
+                            DependencyLabelRef.library == dep["name"],
+                            DependencyLabelRef.application_id == app_id
+                        ).first()
+                        
+                    if lbl:
+                        has_lbl = True
+                        if lbl.is_risky and lbl.risk_type in ("LICENSE_CONFLICT", "TRANSITIVE_LICENSE_CONFLICT", "LICENSE_UNKNOWN"):
+                            gt_risk = lbl.severity or "HIGH"
+                        else:
+                            gt_risk = "NONE"
                 except Exception as e:
                     logger.error("Failed to query license label ref", error=str(e))
                 finally:
                     session.close()
 
-            if gt_risk:
+            if has_lbl:
                 risk_level = gt_risk
-                logger.info("Offline license ground truth match found", library=dep["name"], risk=risk_level)
+                logger.info("Authoritative license ground truth match found", library=dep["name"], risk=risk_level)
             elif license_id and license_id.lower() in db_rules:
                 db_rule = db_rules[license_id.lower()]
                 risk_level = db_rule.risk_level

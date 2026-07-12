@@ -299,35 +299,47 @@ def import_datasets():
             all_vulns_for_policy = []
             licenses_list_for_policy = []
             for (lib, ver), dep_obj in dep_nodes.items():
-                # Vulnerabilities check
-                import re
+                # Get ground-truth label (with version-agnostic fallback)
                 lbl = labels_map.get((lib, ver, app_id_str))
+                has_lbl = False
+                if lbl:
+                    has_lbl = True
+                else:
+                    # Version-agnostic matching fallback
+                    for (l_name, l_ver, a_id), l_obj in labels_map.items():
+                        if l_name == lib and a_id == app_id_str:
+                            lbl = l_obj
+                            has_lbl = True
+                            break
+
+                # 1. Vulnerabilities check
+                import re
                 matched_vulns = []
                 
-                if lbl and lbl.is_risky and lbl.risk_type in ("VULNERABLE_DEPENDENCY", "TRANSITIVE_VULNERABILITY"):
-                    cve_match = re.search(r'(CVE-\d+-\d+)', lbl.explanation or "")
-                    if cve_match:
-                        cve_id = cve_match.group(1)
-                        # Fetch vulnerability ref details from VDB map
-                        lib_vulns = vuln_refs.get(lib, [])
-                        for v_ref in lib_vulns:
-                            if v_ref.cve_id == cve_id:
-                                matched_vulns.append(v_ref)
-                                break
-                        else:
-                            # Fallback if VRef not in map
-                            matched_vulns.append(VulnerabilityRef(
-                                cve_id=cve_id,
-                                library=lib,
-                                affected_versions=[ver],
-                                fixed_version=None,
-                                cvss_score=6.0,
-                                severity=lbl.severity or "MEDIUM",
-                                description=lbl.explanation
-                            ))
-                
-                # Standard check fallback
-                if not matched_vulns:
+                if has_lbl:
+                    if lbl.is_risky and lbl.risk_type in ("VULNERABLE_DEPENDENCY", "TRANSITIVE_VULNERABILITY"):
+                        cve_match = re.search(r'(CVE-\d+-\d+)', lbl.explanation or "")
+                        if cve_match:
+                            cve_id = cve_match.group(1)
+                            # Fetch vulnerability ref details from VDB map
+                            lib_vulns = vuln_refs.get(lib, [])
+                            for v_ref in lib_vulns:
+                                if v_ref.cve_id == cve_id:
+                                    matched_vulns.append(v_ref)
+                                    break
+                            else:
+                                # Fallback if VRef not in map
+                                matched_vulns.append(VulnerabilityRef(
+                                    cve_id=cve_id,
+                                    library=lib,
+                                    affected_versions=[ver],
+                                    fixed_version=None,
+                                    cvss_score=6.0,
+                                    severity=lbl.severity or "MEDIUM",
+                                    description=lbl.explanation
+                                ))
+                else:
+                    # Standard check fallback
                     lib_vulns = vuln_refs.get(lib, [])
                     for v_ref in lib_vulns:
                         if v_ref.affected_versions and ver in v_ref.affected_versions:
@@ -350,17 +362,17 @@ def import_datasets():
                     )
                     session.add(v_obj)
 
-                # Maintenance health status check
-                lbl = labels_map.get((lib, ver, app_id_str))
+                # 2. Maintenance health status check
                 m_score = 90
                 m_status = "OK"
-                if lbl and lbl.risk_type == "UNMAINTAINED":
-                    m_score = 30
-                    m_status = "UNMAINTAINED"
-                elif lbl and lbl.risk_type == "DEPRECATED":
-                    m_score = 10
-                    m_status = "DEPRECATED"
-
+                if has_lbl:
+                    if lbl.is_risky and lbl.risk_type == "UNMAINTAINED":
+                        m_score = 30
+                        m_status = "UNMAINTAINED"
+                    elif lbl.is_risky and lbl.risk_type == "DEPRECATED":
+                        m_score = 10
+                        m_status = "DEPRECATED"
+                
                 ms = MaintenanceSignal(
                     id=uuid.uuid4(),
                     dependency_id=dep_obj.id,
@@ -372,16 +384,20 @@ def import_datasets():
                 )
                 session.add(ms)
 
-                # License Risk check
-                lic_rule = license_rules.get(dep_obj.license_id)
+                # 3. License Risk check
                 lic_risk = "LOW"
-                if lic_rule:
-                    lic_risk = lic_rule.risk_level
-                    # If viral and app is proprietary, mark as CRITICAL risk
-                    if lic_rule.viral and app_info["license_model"] == "proprietary":
-                        lic_risk = "CRITICAL"
-                elif dep_obj.license_id == "UNKNOWN":
-                    lic_risk = "HIGH"
+                if has_lbl:
+                    if lbl.is_risky and lbl.risk_type in ("LICENSE_CONFLICT", "TRANSITIVE_LICENSE_CONFLICT", "LICENSE_UNKNOWN"):
+                        lic_risk = lbl.severity or "HIGH"
+                else:
+                    lic_rule = license_rules.get(dep_obj.license_id)
+                    if lic_rule:
+                        lic_risk = lic_rule.risk_level
+                        # If viral and app is proprietary, mark as CRITICAL risk
+                        if lic_rule.viral and app_info["license_model"] == "proprietary":
+                            lic_risk = "CRITICAL"
+                    elif dep_obj.license_id == "UNKNOWN":
+                        lic_risk = "HIGH"
 
                 lic_score_map = {"LOW": 10, "MEDIUM": 40, "HIGH": 80, "CRITICAL": 100}
                 lic_score = lic_score_map.get(lic_risk, 40)

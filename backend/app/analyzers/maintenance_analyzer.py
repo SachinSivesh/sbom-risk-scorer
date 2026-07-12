@@ -60,18 +60,27 @@ class MaintenanceAnalyzer:
                 SyncSession = sessionmaker(bind=sync_engine)
                 session = SyncSession()
                 try:
+                    # 1. Exact match
                     lbl = session.query(DependencyLabelRef).filter(
                         DependencyLabelRef.library == dep["name"],
                         DependencyLabelRef.version == dep["version"],
                         DependencyLabelRef.application_id == app_id
                     ).first()
+                    
+                    # 2. Version-agnostic fallback
+                    if not lbl:
+                        lbl = session.query(DependencyLabelRef).filter(
+                            DependencyLabelRef.library == dep["name"],
+                            DependencyLabelRef.application_id == app_id
+                        ).first()
+                        
                     if lbl:
                         m_score = 90
                         m_status = "OK"
-                        if lbl.risk_type == "UNMAINTAINED":
+                        if lbl.is_risky and lbl.risk_type == "UNMAINTAINED":
                             m_score = 30
                             m_status = "UNMAINTAINED"
-                        elif lbl.risk_type == "DEPRECATED":
+                        elif lbl.is_risky and lbl.risk_type == "DEPRECATED":
                             m_score = 10
                             m_status = "DEPRECATED"
                         

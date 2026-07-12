@@ -60,7 +60,7 @@ export default function GroundTruthEvaluation() {
 
   return (
     <div className="max-w-7xl mx-auto w-full px-8 py-10">
-      
+
       {/* Header bar */}
       <div className="mb-8">
         <h1 className="text-3xl font-extrabold text-sg-navy tracking-tight uppercase">
@@ -99,11 +99,11 @@ export default function GroundTruthEvaluation() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-        
+
         {/* Confusion Matrix Visual */}
         <div className="lg:col-span-2 bg-white border border-gray-200 rounded-lg p-6 shadow-sm">
           <h3 className="text-md font-bold text-sg-navy uppercase tracking-wider mb-6">Confusion Matrix Layout</h3>
-          
+
           <div className="grid grid-cols-3 gap-2">
             {/* Headers */}
             <div />
@@ -145,7 +145,7 @@ export default function GroundTruthEvaluation() {
         {/* Explainability & Insights */}
         <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-6">
           <h3 className="text-md font-bold text-sg-navy uppercase tracking-wider border-b border-gray-100 pb-3">Validation Insights</h3>
-          
+
           <div className="space-y-4">
             <div className="flex gap-3">
               <ShieldCheck size={20} className="text-sg-success shrink-0" />
