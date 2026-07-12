@@ -44,6 +44,7 @@ services:
       SBOM_STORAGE_PATH: /app/storage/sboms
       DEBUG: "true"
     volumes:
+      - ./backend:/app
       - sbom_storage:/app/storage
     depends_on:
       postgres:
@@ -68,6 +69,7 @@ services:
       SBOM_STORAGE_PATH: /app/storage/sboms
       DEBUG: "true"
     volumes:
+      - ./backend:/app
       - sbom_storage:/app/storage
     depends_on:
       postgres:

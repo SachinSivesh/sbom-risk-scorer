@@ -9,7 +9,7 @@ async def test_remediation_service_no_risk():
     report = {"overall_score": 0}
     res = await service.generate_summary(report)
     assert res["fallback_used"] is True
-    assert "No significant risks detected" in res["summary"]
+    assert "No significant software supply chain risks have been identified" in res["summary"]
     assert res["model_used"] == "deterministic-fallback"
 
 
@@ -58,7 +58,7 @@ async def test_remediation_service_gemini_api_failure_fallback():
         res = await service.generate_summary(report)
         assert res["model_used"] == "deterministic-fallback"
         assert res["fallback_used"] is True
-        assert "HIGH risk rating" in res["summary"]
+        assert "indicates a **HIGH** threat" in res["summary"]
         assert len(res["top_actions"]) > 0
         assert mock_gen.call_count == 1
 
@@ -79,6 +79,6 @@ async def test_remediation_service_gemini_parse_failure_fallback():
         res = await service.generate_summary(report)
         assert res["model_used"] == "deterministic-fallback"
         assert res["fallback_used"] is True
-        assert "HIGH risk rating" in res["summary"]
+        assert "indicates a **HIGH** threat" in res["summary"]
         assert len(res["top_actions"]) > 0
         assert mock_gen.call_count == 2

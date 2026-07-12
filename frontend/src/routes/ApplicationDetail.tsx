@@ -58,23 +58,52 @@ export default function ApplicationDetail() {
   // AI accordion state
   const [expandedActionIdx, setExpandedActionIdx] = useState<number | null>(0);
 
+  const formatAppName = (name: string) => {
+    if (!name) return '';
+    return name
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+      .trim();
+  };
+
   const formatSummaryText = (text: string) => {
     if (!text) return null;
-    const lines = text.split('\n');
+    
+    // Replace CamelCase dataset names with spaced names
+    const cleanedText = text
+      .replace(/ComplianceEngine/g, 'Compliance Engine')
+      .replace(/PaymentService/g, 'Payment Service')
+      .replace(/CustomerPortal/g, 'Customer Portal')
+      .replace(/AnalyticsDashboard/g, 'Analytics Dashboard')
+      .replace(/InternalAPI/g, 'Internal API')
+      .replace(/HRPortal/g, 'HR Portal')
+      .replace(/MobileBackend/g, 'Mobile Backend')
+      .replace(/DevToolkit/g, 'Dev Toolkit')
+      .replace(/NotificationService/g, 'Notification Service')
+      .replace(/VendorGateway/g, 'Vendor Gateway');
+
+    const lines = cleanedText.split('\n');
     return (
       <div className="space-y-2.5 font-sans leading-relaxed text-gray-600">
         {lines.map((line, idx) => {
           const trimmed = line.trim();
           if (!trimmed) return <div key={idx} className="h-1" />;
           
-          const highlightCode = (str: string) => {
-            const parts = str.split(/'([^']+)'/g);
+          const parseInline = (str: string) => {
+            const parts = str.split(/(\*\*.*?\*\*|'.*?')/g);
             return parts.map((part, pIdx) => {
-              if (pIdx % 2 === 1) {
+              if (part.startsWith('**') && part.endsWith('**')) {
                 return (
-                  <strong key={pIdx} className="bg-red-50 text-sg-red font-extrabold font-mono px-1 py-0.5 rounded border border-sg-red/10 text-[10px]">
-                    {part}
+                  <strong key={pIdx} className="font-bold text-sg-navy text-xs">
+                    {part.slice(2, -2)}
                   </strong>
+                );
+              }
+              if (part.startsWith("'") && part.endsWith("'")) {
+                return (
+                  <code key={pIdx} className="bg-red-50 text-sg-red font-extrabold font-mono px-1 py-0.5 rounded border border-sg-red/10 text-[10px]">
+                    {part.slice(1, -1)}
+                  </code>
                 );
               }
               return part;
@@ -91,22 +120,10 @@ export default function ApplicationDetail() {
           
           if (trimmed.startsWith('* ') || trimmed.startsWith('- ')) {
             const content = trimmed.substring(2);
-            const boldMatch = content.match(/^\*\*([^*]+)\*\*(.*)/);
-            if (boldMatch) {
-              return (
-                <div key={idx} className="flex items-start gap-2 text-xs pl-2.5 mt-1 text-gray-600">
-                  <span className="text-sg-red font-bold mt-0.5">&bull;</span>
-                  <span className="text-xs text-gray-600">
-                    <strong className="font-bold text-sg-navy">{boldMatch[1]}</strong>
-                    {highlightCode(boldMatch[2])}
-                  </span>
-                </div>
-              );
-            }
             return (
               <div key={idx} className="flex items-start gap-2 text-xs pl-2.5 mt-1 text-gray-600">
                 <span className="text-sg-red font-bold mt-0.5">&bull;</span>
-                <span>{highlightCode(content)}</span>
+                <span>{parseInline(content)}</span>
               </div>
             );
           }
@@ -116,14 +133,14 @@ export default function ApplicationDetail() {
             return (
               <div key={idx} className="flex items-start gap-2 text-xs pl-2.5 mt-1 text-gray-600">
                 <span className="text-sg-red font-bold font-mono">{numMatch[1]}.</span>
-                <span>{highlightCode(numMatch[2])}</span>
+                <span>{parseInline(numMatch[2])}</span>
               </div>
             );
           }
           
           return (
             <p key={idx} className="text-xs text-gray-600 leading-relaxed">
-              {highlightCode(trimmed)}
+              {parseInline(trimmed)}
             </p>
           );
         })}
@@ -280,7 +297,7 @@ export default function ApplicationDetail() {
       <div className="bg-white border border-gray-200 rounded-lg p-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 shadow-sm">
         <div>
           <h1 className="text-3xl font-extrabold text-sg-navy tracking-tight uppercase print:text-xl">
-            {application.name}
+            {formatAppName(application.name)}
           </h1>
           <p className="text-gray-500 text-sm mt-1 max-w-3xl leading-relaxed">
             {application.description || 'No description configured for this software repository.'}
@@ -345,6 +362,41 @@ export default function ApplicationDetail() {
               </span>
             </div>
 
+            {/* Policy Compliance Gate Card */}
+            {report && report.breakdown && report.breakdown.policy_evaluation && (
+              <div className={`border rounded-lg p-5 shadow-sm flex flex-col items-center text-center ${
+                report.breakdown.policy_evaluation.status === 'PASSED'
+                  ? 'bg-green-50/40 border-green-200 text-green-800'
+                  : 'bg-red-50/40 border-red-200 text-red-800'
+              }`}>
+                <h3 className="text-xs font-bold uppercase tracking-wider mb-2 text-gray-400">Compliance Status</h3>
+                <div className="flex items-center gap-1.5 mb-2">
+                  <span className={`h-2.5 w-2.5 rounded-full ${
+                    report.breakdown.policy_evaluation.status === 'PASSED' ? 'bg-green-500 animate-pulse' : 'bg-red-500 animate-pulse'
+                  }`} />
+                  <span className="text-xs font-extrabold uppercase tracking-tight">
+                    {report.breakdown.policy_evaluation.status === 'PASSED' ? 'PASSED (SECURE)' : 'DEPLOYMENT REJECTED'}
+                  </span>
+                </div>
+                
+                {report.breakdown.policy_evaluation.violations.length > 0 ? (
+                  <div className="w-full text-left space-y-1.5 mt-2">
+                    <span className="text-[9px] font-black uppercase tracking-widest text-red-600 block mb-1">Gate Failures:</span>
+                    {report.breakdown.policy_evaluation.violations.map((v, i) => (
+                      <div key={i} className="text-[10px] text-red-700 bg-red-100/30 p-2 rounded border border-red-100/60 flex items-start gap-1 font-semibold leading-relaxed">
+                        <span className="text-red-500 font-bold">•</span>
+                        <span>{v.description}</span>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-[10px] text-green-700 font-semibold leading-relaxed mt-1">
+                    All enterprise security and open-source license governance policies are fully satisfied.
+                  </p>
+                )}
+              </div>
+            )}
+
             {/* Risk Sub-dimensions list */}
             {report && (
               <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-4">
@@ -365,6 +417,40 @@ export default function ApplicationDetail() {
                     </div>
                   </div>
                 ))}
+              </div>
+            )}
+
+            {/* Explainable Contributions block */}
+            {report && report.breakdown && report.breakdown.contributions && (
+              <div className="bg-white border border-gray-200 rounded-lg p-6 shadow-sm space-y-3">
+                <h3 className="text-xs font-bold text-gray-400 uppercase tracking-wider border-b border-gray-100 pb-3">Risk Contributions</h3>
+                <div className="space-y-2 text-xs font-semibold text-gray-500">
+                  <div className="flex justify-between items-center">
+                    <span>Security Vulnerabilities:</span>
+                    <span className="text-sg-navy font-bold font-mono">+{report.breakdown.contributions.vulnerability}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>License Risk:</span>
+                    <span className="text-sg-navy font-bold font-mono">+{report.breakdown.contributions.license}</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span>Maintenance Health:</span>
+                    <span className="text-sg-navy font-bold font-mono">+{report.breakdown.contributions.maintenance}</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-2 border-b border-dashed">
+                    <span>Business Criticality:</span>
+                    <span className={`${
+                      report.breakdown.contributions.business_criticality >= 0 ? 'text-sg-red' : 'text-green-600'
+                    } font-bold font-mono`}>
+                      {report.breakdown.contributions.business_criticality >= 0 ? '+' : ''}
+                      {report.breakdown.contributions.business_criticality}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center pt-1 text-xs font-extrabold">
+                    <span className="text-sg-navy uppercase">Total Risk Index:</span>
+                    <span className="text-sg-red font-mono text-sm">{score}</span>
+                  </div>
+                </div>
               </div>
             )}
 
@@ -887,15 +973,26 @@ export default function ApplicationDetail() {
                           </LineChart>
                         </ResponsiveContainer>
                       </div>
-                    ) : (
-                      <div className="text-center py-16 text-gray-400">
-                        <TrendingUp size={48} className="mx-auto mb-4 text-sg-red/30" />
-                        <h4 className="font-bold text-sg-navy">Insufficient Trend History</h4>
-                        <p className="text-xs text-gray-400 mt-2 max-w-sm mx-auto leading-relaxed">
-                          Upload subsequent versions of your SBOM mapping to build and monitor trend curves over time.
-                        </p>
-                      </div>
-                    )}
+                    ) : (() => {
+                      const activeSbom = application?.sboms?.find(s => s.id === selectedSbomId) || application?.sboms?.[0];
+                      return (
+                        <div className="text-center py-16 text-gray-400">
+                          <TrendingUp size={48} className="mx-auto mb-4 text-sg-red/30" />
+                          <h4 className="font-bold text-sg-navy uppercase tracking-wider text-xs">Insufficient Trend History</h4>
+                          <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg max-w-md mx-auto mt-4 text-left space-y-2">
+                            <div className="text-xs text-gray-500">
+                              <strong>Current SBOM Artifact:</strong> <code className="font-mono text-sg-navy bg-white border px-1 py-0.5 rounded text-[10px] break-all">{activeSbom?.original_filename || 'Default Artifact'}</code>
+                            </div>
+                            <div className="text-xs text-gray-500">
+                              <strong>Upload Date:</strong> <span className="font-mono text-sg-navy font-semibold">{activeSbom?.created_at ? new Date(activeSbom.created_at).toLocaleString() : 'N/A'}</span>
+                            </div>
+                            <div className="text-[11px] text-gray-400 pt-1.5 border-t border-gray-200 leading-relaxed font-semibold">
+                              Only one version of the SBOM has been analyzed. Upload subsequent SBOM revisions for this application using the top-right button to enable chronological risk trend graph tracking.
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })()}
                   </div>
                 )}
 

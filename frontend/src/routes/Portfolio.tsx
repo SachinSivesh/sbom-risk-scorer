@@ -1,14 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useApplications, useCreateApplication } from '../hooks/useApplications';
+import { useApplications, useCreateApplication, usePortfolioSummary } from '../hooks/useApplications';
 import { Plus, Search, ShieldAlert, Layers, Calendar, Loader2 } from 'lucide-react';
 import { useUiStore } from '../store/uiStore';
 import type { ApplicationListItem } from '../types/application';
 
 export default function Portfolio() {
   const { data: applications, isLoading, error } = useApplications();
+  const { data: summary } = usePortfolioSummary();
   const createMutation = useCreateApplication();
   const { setSelectedApplicationId } = useUiStore();
+  
+  const formatAppName = (name: string) => {
+    if (!name) return '';
+    return name
+      .replace(/([a-z0-9])([A-Z])/g, '$1 $2')
+      .replace(/([A-Z])([A-Z][a-z])/g, '$1 $2')
+      .trim();
+  };
   
   const [searchTerm, setSearchTerm] = useState('');
   const [sortField, setSortField] = useState<string>('score');
@@ -147,6 +156,50 @@ export default function Portfolio() {
         </button>
       </div>
 
+      {/* Portfolio Rollup Executive Summary KPI Stats */}
+      {summary && (
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <div className="bg-white border border-gray-200 rounded-lg p-5 shadow-sm flex flex-col justify-between">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Portfolio Risk Score</span>
+            <div className="flex items-baseline gap-1 mt-2">
+              <span className="text-3xl font-extrabold text-sg-navy font-mono">{summary.average_risk_score}</span>
+              <span className="text-xs text-gray-400">/100</span>
+            </div>
+            <div className="text-[10px] text-gray-400 mt-2 font-medium">Average risk across {summary.total_applications} active systems.</div>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-lg p-5 shadow-sm flex flex-col justify-between">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Total Vulnerabilities</span>
+            <div className="flex items-baseline gap-1 mt-2">
+              <span className="text-3xl font-extrabold text-sg-red font-mono">{summary.vulnerability_stats.total || 0}</span>
+              <span className="text-xs text-gray-400">CVEs</span>
+            </div>
+            <div className="text-[10px] text-gray-400 mt-2 font-medium">Total findings across all dependency trees.</div>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-lg p-5 shadow-sm flex flex-col justify-between">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">Third-Party Libraries</span>
+            <div className="flex items-baseline gap-1 mt-2">
+              <span className="text-3xl font-extrabold text-sg-warning font-mono">
+                {Object.entries(summary.license_distribution).filter(([lic]) => lic.includes("GPL") || lic.includes("AGPL") || lic === "UNKNOWN").reduce((sum, [, count]: any) => sum + count, 0)}
+              </span>
+              <span className="text-xs text-gray-400">libraries</span>
+            </div>
+            <div className="text-[10px] text-gray-400 mt-2 font-medium">Viral copyleft or un-declared licenses.</div>
+          </div>
+
+          <div className="bg-white border border-gray-200 rounded-lg p-5 shadow-sm flex flex-col justify-between">
+            <span className="text-[10px] font-bold text-gray-400 uppercase tracking-widest">System Criticality</span>
+            <div className="flex flex-row justify-between mt-2 text-[10px] font-bold text-gray-500">
+              <div>CRIT: {summary.criticality_distribution.CRITICAL || 0}</div>
+              <div>HIGH: {summary.criticality_distribution.HIGH || 0}</div>
+              <div>MED: {summary.criticality_distribution.MEDIUM || 0}</div>
+            </div>
+            <div className="text-[10px] text-gray-400 mt-2 font-medium">Breakdown by asset tier ratings.</div>
+          </div>
+        </div>
+      )}
+
       {/* Search & Sort Input Bar */}
       <div className="bg-white border border-gray-200 rounded-lg p-4 mb-6 flex flex-col md:flex-row md:items-center gap-4 shadow-sm">
         <div className="relative flex-1 w-full">
@@ -245,7 +298,7 @@ export default function Portfolio() {
                   <div className="flex justify-between items-start gap-3 mb-3">
                     <div>
                       <h3 className="text-lg font-bold text-sg-navy group-hover:text-sg-red transition-all">
-                        {app.name}
+                        {formatAppName(app.name)}
                       </h3>
                       <span className={`inline-block rounded px-2 py-0.5 text-[10px] font-extrabold uppercase mt-1.5 ${getScoreBadgeClass(app.latest_score)}`}>
                         {app.latest_score !== null ? `${app.latest_category} RISK` : 'PENDING ANALYSIS'}

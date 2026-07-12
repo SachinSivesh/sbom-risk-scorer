@@ -5,7 +5,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from app.config import get_settings
 from app.utils.logging import setup_logging, get_logger
-from app.api import applications, sboms, reports, graph
+from app.api import applications, sboms, reports, graph, portfolio, evaluation
 
 
 settings = get_settings()
@@ -57,6 +57,16 @@ app.include_router(
     graph.router,
     prefix=settings.API_V1_PREFIX + "/graph",
     tags=["Graph"],
+)
+app.include_router(
+    portfolio.router,
+    prefix=settings.API_V1_PREFIX + "/portfolio",
+    tags=["Portfolio"],
+)
+app.include_router(
+    evaluation.router,
+    prefix=settings.API_V1_PREFIX + "/evaluation",
+    tags=["Evaluation"],
 )
 
 

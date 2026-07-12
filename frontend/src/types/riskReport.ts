@@ -14,11 +14,24 @@ export interface RiskReport {
 
 export interface RiskBreakdown {
   weights_used: Record<string, number>;
+  contributions?: Record<string, number>;
+  policy_evaluation?: PolicyEvaluation;
   top_contributing_dependencies: TopContributor[];
   confidence: number;
   total_dependencies?: number;
   dependencies_with_complete_data?: number;
   note?: string;
+}
+
+export interface PolicyEvaluation {
+  status: 'PASSED' | 'REJECTED';
+  score_threshold_used: number;
+  violations: PolicyViolation[];
+}
+
+export interface PolicyViolation {
+  rule: string;
+  description: string;
 }
 
 export interface TopContributor {

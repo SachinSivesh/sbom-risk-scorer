@@ -1,10 +1,8 @@
 import { Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, UploadCloud, History, Settings, ShieldAlert } from 'lucide-react';
-import { useUiStore } from '../../store/uiStore';
+import { LayoutDashboard, History, Settings, ShieldAlert } from 'lucide-react';
 
 export default function Sidebar() {
   const location = useLocation();
-  const { setIsUploadOpen, selectedApplicationId } = useUiStore();
 
   const menuItems = [
     {
@@ -16,6 +14,11 @@ export default function Sidebar() {
       name: 'Scan History',
       icon: History,
       path: '/history',
+    },
+    {
+      name: 'Model Validation',
+      icon: ShieldAlert,
+      path: '/evaluation',
     },
     {
       name: 'Scoring Policy',
@@ -45,21 +48,6 @@ export default function Sidebar() {
             </Link>
           );
         })}
-
-        {/* Global Quick-Upload Action */}
-        <button
-          onClick={() => setIsUploadOpen(true)}
-          disabled={!selectedApplicationId}
-          className={`flex w-full items-center gap-3 px-4 py-3 rounded-md text-sm font-semibold transition-all mt-4 border border-dashed ${
-            selectedApplicationId
-              ? 'border-sg-red text-white hover:bg-sg-red/10 cursor-pointer'
-              : 'border-gray-700 text-gray-500 cursor-not-allowed'
-          }`}
-          title={!selectedApplicationId ? "Select an application first to enable quick upload" : ""}
-        >
-          <UploadCloud size={18} />
-          <span>Upload SBOM</span>
-        </button>
       </nav>
 
       {/* Footer / Context Info */}

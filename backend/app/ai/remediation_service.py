@@ -80,19 +80,17 @@ class RemediationService:
         license_sub = risk_report.get("license_subscore", 0)
         maint_sub = risk_report.get("maintenance_subscore", 0)
 
-        # Build summary
-        summary = (
-            f"This application has a {category} risk rating with an overall score of {score}/100. "
-            f"The vulnerability risk score is {vuln_sub}/100, license compliance risk is {license_sub}/100, "
-            f"and maintenance health risk is {maint_sub}/100."
-        )
+        app_info = risk_report.get("application", {})
+        app_name = app_info.get("name", "Target Application")
+        crit = app_info.get("criticality", "MEDIUM")
+        lic_model = app_info.get("license_model", "proprietary")
 
         # Build actions based on highest subscores
         actions = []
         sub_scores = [
-            ("vulnerability", vuln_sub, "Review and remediate known vulnerabilities"),
-            ("license", license_sub, "Review license compliance"),
-            ("maintenance", maint_sub, "Evaluate dependency health and consider alternatives"),
+            ("vulnerability", vuln_sub, "Prioritize dependency patching and vulnerability remediation across critical exposure paths."),
+            ("license", license_sub, f"Audit license matrix for viral compliance concerns against the proprietary baseline."),
+            ("maintenance", maint_sub, "Decommission archived or deprecated libraries to prevent technical debt accumulation."),
         ]
         sub_scores.sort(key=lambda x: x[1], reverse=True)
 
@@ -100,21 +98,26 @@ class RemediationService:
             if sub_score > 0 and len(actions) < 3:
                 priority = "HIGH" if sub_score >= 50 else "MEDIUM" if sub_score >= 25 else "LOW"
                 actions.append({
-                    "title": f"Address {name} risks (score: {sub_score}/100)",
+                    "title": f"Mitigate {name} threat vector",
                     "description": desc,
                     "priority": priority,
                 })
 
-        # Extract top contributing deps from breakdown
-        breakdown = risk_report.get("breakdown", {})
-        top_deps = breakdown.get("top_contributing_dependencies", [])
-        if top_deps and len(actions) < 3:
-            dep = top_deps[0]
-            actions.append({
-                "title": f"Prioritize {dep.get('name', 'unknown')}@{dep.get('version', 'unknown')}",
-                "description": f"This dependency has the highest weighted risk contribution ({dep.get('weighted_contribution', 0)}).",
-                "priority": "HIGH",
-            })
+        # Structured markdown consultant summary
+        summary = f"""### EXECUTIVE SUMMARY
+The Software Supply Chain review of **{app_name}** indicates a **{category}** threat exposure posture. This assessment correlates open-source vulnerabilities, package license obligations, and codebase upkeep metrics, scaled against a **{crit}** criticality business rating.
+
+---
+
+### THREAT & ATTACK SURFACE ANALYSIS
+* **Vulnerability Vectors**: A security score of **{vuln_sub}/100** indicates exposure to known vulnerabilities. These dependencies form active entry paths that must be insulated.
+* **Component Aging & Maintenance**: The maintenance score of **{maint_sub}/100** points to unmaintained or deprecated libraries within the dependency tree.
+
+---
+
+### REGULATORY & COMPLIANCE IMPACT
+The system is governed under a **{lic_model}** model. License subscore of **{license_sub}/100** identifies potential compliance issues with copyleft or viral licenses. A thorough licensing audit is advised to clear liability concerns.
+"""
 
         return {
             "summary": summary,
@@ -126,7 +129,7 @@ class RemediationService:
     def _no_risk_response(self) -> dict:
         """Response for zero-risk applications."""
         return {
-            "summary": "No significant risks detected. This application's dependencies appear to be well-maintained, properly licensed, and free of known vulnerabilities.",
+            "summary": "### EXECUTIVE SUMMARY\nNo significant software supply chain risks have been identified. The application's dependencies are verified to be fully maintained, properly licensed, and free of known vulnerabilities.",
             "top_actions": [],
             "fallback_used": True,
             "model_used": "deterministic-fallback",

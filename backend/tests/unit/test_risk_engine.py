@@ -58,15 +58,16 @@ def test_calculate_risk_score():
     # direct (is_direct=True, weight=2)
     # transitive (is_direct=False, weight=1)
     
-    # vuln_subscore: (0 * 2 + 75 * 1) / 3 = 25
-    # license_subscore: (0 * 2 + 90 * 1) / 3 = 30
-    # maintenance_subscore: ((100-100)*2 + (100-20)*1) / 3 = (0 + 80) / 3 = 26.67
+    # Blended Max (40%) and Average (60%) Formula:
+    # vuln_avg = 25, vuln_max = 75 => blend = 75*0.4 + 25*0.6 = 45
+    # license_avg = 30, license_max = 90 => blend = 90*0.4 + 30*0.6 = 54
+    # maint_avg = 26.67, maint_max = 80 => blend = 80*0.4 + 26.67*0.6 = 48
     
-    # overall_score: 0.5 * 25 + 0.3 * 30 + 0.2 * 26.67 = 12.5 + 9.0 + 5.33 = 26.83 -> rounds to 27
-    assert result.vulnerability_subscore == 25
-    assert result.license_subscore == 30
-    assert result.maintenance_subscore == 27
-    assert result.overall_score == 27
+    # overall_score: 0.5 * 45 + 0.3 * 54 + 0.2 * 48 = 22.5 + 16.2 + 9.6 = 48.3 -> rounds to 48
+    assert result.vulnerability_subscore == 45
+    assert result.license_subscore == 54
+    assert result.maintenance_subscore == 48
+    assert result.overall_score == 48
     assert result.category == "MEDIUM"
     assert result.breakdown["confidence"] == 1.0
 

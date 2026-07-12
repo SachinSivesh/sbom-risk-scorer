@@ -95,6 +95,9 @@ def analyze_sbom_task(self, sbom_id: str):
             return
 
         # ── Step 2: Persist dependencies and build graph ────────────
+        sbom.status = "resolving"
+        session.commit()
+
         dep_models = []
         bom_ref_to_dep_id = {}
 
@@ -115,7 +118,7 @@ def analyze_sbom_task(self, sbom_id: str):
             if parsed_dep.bom_ref:
                 bom_ref_to_dep_id[parsed_dep.bom_ref] = dep.id
 
-        session.flush()  # Get IDs assigned
+        session.flush()
 
         # Build graph and persist edges
         graph_builder = GraphBuilder()
@@ -141,11 +144,30 @@ def analyze_sbom_task(self, sbom_id: str):
         sbom.component_count = len(dep_models)
         session.commit()
 
-        # ── Step 3: Analyze (concurrent) ────────────────────────────
-        sbom.status = "analyzing"
-        session.commit()
+        # Compute depths using networkx
+        import networkx as nx
+        dg = nx.DiGraph()
+        for edge in parse_result.edges:
+            from_id = bom_ref_to_dep_id.get(edge.from_ref)
+            to_id = bom_ref_to_dep_id.get(edge.to_ref)
+            if from_id and to_id:
+                dg.add_edge(from_id, to_id)
 
-        # Prepare dependency data for analyzers
+        dep_depths = {}
+        for dep in dep_models:
+            if dep.is_direct:
+                dep_depths[dep.id] = 1
+
+        for direct_dep in [d for d in dep_models if d.is_direct]:
+            if direct_dep.id in dg:
+                try:
+                    for target, path in nx.single_source_shortest_path(dg, direct_dep.id).items():
+                        dep_depths[target] = min(dep_depths.get(target, 999), len(path))
+                except Exception as e:
+                    logger.error("Error computing graph shortest path", error=str(e))
+
+        # ── Step 3: Sequential Stage Analysis ─────────────────────────
+        app_id_val = sbom.application.app_id if sbom.application else None
         dep_data = [
             {
                 "id": str(dep.id),
@@ -155,21 +177,19 @@ def analyze_sbom_task(self, sbom_id: str):
                 "license_id": dep.license_id,
                 "repo_url": dep.repo_url,
                 "is_direct": dep.is_direct,
+                "app_id": app_id_val,
             }
             for dep in dep_models
         ]
 
-        # Run analyzers concurrently
-        vuln_results, license_results, maint_results = _run_async(
-            _run_analyzers(dep_data)
-        )
-
-        vuln_warnings = vuln_results[1] if isinstance(vuln_results, tuple) else []
-        vuln_data = vuln_results[0] if isinstance(vuln_results, tuple) else vuln_results
+        # 3.1 Vulnerability Analysis
+        sbom.status = "vuln_checking"
+        session.commit()
+        vuln_analyzer = VulnerabilityAnalyzer()
+        vuln_results, vuln_warnings = _run_async(vuln_analyzer.analyze(dep_data))
         all_warnings.extend(vuln_warnings)
 
-        # Persist vulnerability findings
-        for vr in vuln_data:
+        for vr in vuln_results:
             dep_uuid = uuid.UUID(vr.dependency_id)
             for v in vr.vulnerabilities:
                 vuln_model = Vulnerability(
@@ -183,7 +203,18 @@ def analyze_sbom_task(self, sbom_id: str):
                 )
                 session.add(vuln_model)
 
-        # Persist maintenance signals
+        # 3.2 License Analysis
+        sbom.status = "license_checking"
+        session.commit()
+        license_analyzer = LicenseAnalyzer()
+        license_results = license_analyzer.analyze(dep_data)
+
+        # 3.3 Maintenance Analysis
+        sbom.status = "maint_checking"
+        session.commit()
+        maint_analyzer = MaintenanceAnalyzer()
+        maint_results = _run_async(maint_analyzer.analyze(dep_data))
+
         for mr in maint_results:
             dep_uuid = uuid.UUID(mr.dependency_id)
             maint_model = MaintenanceSignal(
@@ -200,26 +231,48 @@ def analyze_sbom_task(self, sbom_id: str):
 
         session.commit()
 
-        # ── Step 4: Score ───────────────────────────────────────────
+        # ── Step 4: Risk Scoring ──────────────────────────────────────
+        sbom.status = "scoring"
+        session.commit()
         risk_engine = RiskEngine()
 
-        # Build per-dependency scores
+        # Build per-dependency scores and perform transitive propagation
         dep_scores = []
-        vuln_by_dep = {vr.dependency_id: vr for vr in vuln_data}
+        vuln_by_dep = {vr.dependency_id: vr for vr in vuln_results}
         license_by_dep = {lr.dependency_id: lr for lr in license_results}
         maint_by_dep = {mr.dependency_id: mr for mr in maint_results}
 
+        # Initialize base vulnerability scores
+        vuln_scores = {}
         for dep in dep_models:
             dep_id_str = str(dep.id)
             vr = vuln_by_dep.get(dep_id_str)
+            base_score = 0
+            if vr:
+                base_score = risk_engine.compute_vuln_score([
+                    {"severity": v.severity} for v in vr.vulnerabilities
+                ])
+            vuln_scores[dep.id] = base_score
+
+        # Propagate child vulnerability risk up to parent (attenuated by 50%)
+        # Run up to 5 passes to cover transitive depth chains
+        for _ in range(5):
+            for parent_id in list(dg.nodes):
+                for child_id in dg.successors(parent_id):
+                    propagated = round(vuln_scores.get(child_id, 0) * 0.5)
+                    if propagated > vuln_scores.get(parent_id, 0):
+                        vuln_scores[parent_id] = propagated
+
+        # Retrieve application criticality
+        app_criticality = sbom.application.criticality if sbom.application else "MEDIUM"
+
+        for dep in dep_models:
+            dep_id_str = str(dep.id)
             lr = license_by_dep.get(dep_id_str)
             mr = maint_by_dep.get(dep_id_str)
 
-            vuln_score = 0
-            if vr:
-                vuln_score = risk_engine.compute_vuln_score([
-                    {"severity": v.severity} for v in vr.vulnerabilities
-                ])
+            # Use propagated score
+            v_score = vuln_scores.get(dep.id, 0)
 
             license_score = 0
             if lr:
@@ -234,12 +287,15 @@ def analyze_sbom_task(self, sbom_id: str):
                 name=dep.name,
                 version=dep.version,
                 is_direct=dep.is_direct,
-                vuln_score=vuln_score,
+                vuln_score=v_score,
                 license_score=license_score,
                 maintenance_score=maintenance_score,
+                depth=dep_depths.get(dep.id, 2),
+                license_id=dep.license_id or "UNKNOWN",
+                vulnerabilities=[{"severity": v.severity} for v in (vuln_by_dep.get(dep_id_str).vulnerabilities if vuln_by_dep.get(dep_id_str) else [])],
             ))
 
-        score_result = risk_engine.calculate(dep_scores)
+        score_result = risk_engine.calculate(dep_scores, criticality=app_criticality)
 
         # Persist risk report
         risk_report = RiskReport(
@@ -254,8 +310,12 @@ def analyze_sbom_task(self, sbom_id: str):
             breakdown_json=score_result.breakdown,
         )
         session.add(risk_report)
+        session.flush()
 
-        # ── Step 5: AI Summary ──────────────────────────────────────
+        # ── Step 5: AI Summary ────────────────────────────────────────
+        sbom.status = "ai_assessing"
+        session.commit()
+
         try:
             remediation_service = RemediationService()
             report_dict = {
@@ -265,6 +325,15 @@ def analyze_sbom_task(self, sbom_id: str):
                 "license_subscore": score_result.license_subscore,
                 "maintenance_subscore": score_result.maintenance_subscore,
                 "breakdown": score_result.breakdown,
+                "application": {
+                    "name": sbom.application.name if sbom.application else "unknown",
+                    "criticality": sbom.application.criticality if sbom.application else "MEDIUM",
+                    "language": sbom.application.language if sbom.application else "unknown",
+                    "license_model": sbom.application.license_model if sbom.application else "proprietary",
+                    "business_owner": sbom.application.business_owner if sbom.application else "unknown",
+                    "department": sbom.application.department if sbom.application else "unknown",
+                    "deployment": sbom.application.deployment if sbom.application else "unknown",
+                }
             }
             ai_result = _run_async(remediation_service.generate_summary(report_dict))
 
@@ -277,15 +346,37 @@ def analyze_sbom_task(self, sbom_id: str):
                 fallback_used=ai_result["fallback_used"],
             )
             session.add(ai_report)
-
         except Exception as e:
             logger.error("AI summary generation failed", error=str(e))
             # Create a fallback AI report
+            fallback_text = (
+                "### Executive Summary\n"
+                f"Automated risk scoring is complete. The application received an overall Risk Index score of {score_result.overall_score}/100, placing it in the {score_result.category} risk category.\n\n"
+                "### Major Risks\n"
+                f"The application exhibits a vulnerability subscore of {score_result.vulnerability_subscore}/100, representing the main driver of threat exposure.\n\n"
+                "### License Issues\n"
+                f"Open source compliance checks yielded a subscore of {score_result.license_subscore}/100, outlining copyright and legal liabilities.\n\n"
+                "### Supply Chain Exposure\n"
+                f"Dependency maintenance and freshness metrics evaluated to {score_result.maintenance_subscore}/100.\n\n"
+                "### Business Impact\n"
+                f"Operational risk scales with business criticality. Deployment governance gates must verify overall alignment.\n\n"
+                "### Recommended Remediation\n"
+                "1. Address high-risk and critical vulnerabilities first.\n"
+                "2. Remediate licensing policy conflicts.\n"
+                "3. Clean deprecated or unmaintained packages.\n\n"
+                "### Deployment Recommendation\n"
+                f"Deployment gate check: {score_result.breakdown.get('policy_evaluation', {}).get('status', 'REJECTED')}.\n\n"
+                "### Confidence Level\n"
+                "100% automated validation (offline reference datasets and rules matrices)."
+            )
             ai_report = AIReport(
                 id=uuid.uuid4(),
                 risk_report_id=risk_report.id,
-                summary=f"Risk score: {score_result.overall_score}/100 ({score_result.category}). Automated analysis complete.",
-                top_actions_json=[],
+                summary=fallback_text,
+                top_actions_json=[
+                    {"title": "Execute Patch Management", "description": "Prioritize updating packages with direct vulnerabilities.", "priority": "HIGH"},
+                    {"title": "Review Copyleft Licensing", "description": "Ensure legal clearance for viral GPL/AGPL compliance.", "priority": "MEDIUM"}
+                ],
                 model_used="error-fallback",
                 fallback_used=True,
             )

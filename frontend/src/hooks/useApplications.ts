@@ -24,6 +24,14 @@ export function useCreateApplication() {
       applicationsApi.create(data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['applications'] });
+      queryClient.invalidateQueries({ queryKey: ['portfolio-summary'] });
     },
+  });
+}
+
+export function usePortfolioSummary() {
+  return useQuery<any>({
+    queryKey: ['portfolio-summary'],
+    queryFn: applicationsApi.portfolioSummary,
   });
 }

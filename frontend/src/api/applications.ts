@@ -14,4 +14,7 @@ export const applicationsApi = {
 
   trend: (id: string): Promise<RiskTrendPoint[]> =>
     apiClient.get(`/applications/${id}/trend`),
+
+  portfolioSummary: (): Promise<any> =>
+    apiClient.get('/portfolio/summary'),
 };

@@ -6,6 +6,7 @@ import DependencyGraphPage from './routes/DependencyGraphPage';
 import RiskReportPage from './routes/RiskReportPage';
 import Settings from './routes/Settings';
 import ScanHistory from './routes/ScanHistory';
+import GroundTruthEvaluation from './routes/GroundTruthEvaluation';
 import Navbar from './components/layout/Navbar';
 import Sidebar from './components/layout/Sidebar';
 import SbomUploadModal from './components/upload/SbomUploadModal';
@@ -39,6 +40,7 @@ function AppContent() {
             <Route path="/graph/:sbomId" element={<DependencyGraphPage />} />
             <Route path="/report/:sbomId" element={<RiskReportPage />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/evaluation" element={<GroundTruthEvaluation />} />
           </Routes>
         </main>
       </div>
